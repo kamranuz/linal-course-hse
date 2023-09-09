@@ -1,6 +1,6 @@
 # Linear Algebra for Data Science Course
 
-Welcome to the repository for the **Linear Algebra for Data Science** course, part of the [Data Science](https://www.hse.ru/ma/datasci/) master's program at [Higher School of Economics (HSE)](https://www.hse.ru/). This course is taught by [Dmitri Piontkovski](https://www.hse.ru/en/org/persons/64913), a leading expert in the field. Here, you will find all the essential materials and resources needed to succeed in this course.
+Welcome to the repository for the [Linear Algebra for Data Science](https://www.hse.ru/en/edu/courses/470902553) course, part of the [Data Science](https://www.hse.ru/ma/datasci/) master's program at [Higher School of Economics (HSE)](https://www.hse.ru/). This course is taught by [Dmitri Piontkovski](https://www.hse.ru/en/org/persons/64913), a leading expert in the field. Here, you will find all the essential materials and resources needed to succeed in this course.
 
 ## Course Description
 
