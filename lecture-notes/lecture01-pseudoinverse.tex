@@ -1,4 +1,4 @@
-    \section{Difference between fundamental and applied linear algebra. Problems with the real data. Pseudoinverse matrices. Skeletonization.}
+\section{Difference between fundamental and applied linear algebra. Problems with the real data. Pseudoinverse matrices. Skeletonization.}
     \par 
     Let's consider some of the standard linear algebra problems, for example, solving the systems of linear equations. It can be written:
     \[
@@ -70,7 +70,7 @@
     \]
     It looks like 2 parallel lines. Of course, rarely some $\vec{x}$ exists, but we cannot solve this system because the coefficients are not exact (they contain some random errors, rounding after calculations, etc.). But answers can still be the same. How much do we need to sell? We can choose, for example, solutions A or B or even C, but what would be more optimal or correct. We will give an answer to this question right off the bat in the next lecture. Now let's define some new concepts that will help us with it.
     \subsection*{Pseudoinverse Matrices}
-    \begin{definition}{}{}
+    \begin{definition}{Pseudoinverse}{}
         Let $A \in M_{m\times n}(\C)$. Then $C$ is called pseudoinverse matrix to A, or Moore-Penrose (pseudo) inverse, if it is satisfies Penrose axioms: 
         \begin{center}
             \renewcommand{\arraystretch}{1.2}
@@ -147,7 +147,7 @@
         Then $\rank F = \rank G = r$. $F, G$ are called matrices of full rank.
     \end{definition}
     \begin{theorema}{}{}
-        For each matrix $A \in M_{m\times n}(\C)$, its pseudoinverse matrix $A^+$ exists. If $A = F \cdot G$ is a full rank decomposition, then:
+        For each matrix $A \in M_{m\times n}(\C)$, its pseudoinverse matrix $A^+$ exists. If $A = F \cdot G$ is a full rank decomposition, then
         \[
             A^+ = G^+F^+ = G^*\left(G,G^*\right)^{-1} \left(F^*, F\right)^{-1}F^*. 
         \]
