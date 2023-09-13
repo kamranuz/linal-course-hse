@@ -1,0 +1,326 @@
+\section{Pseudoinverse matrices. Skeletonization. Singular value decomposition (SVD)}
+
+\begin{problem}{Skeletonization and pseudoinverse matrix}
+    Find the pseudoinverse matrix to matrix $A$ using skeletonization
+    \[
+             A = \begin{bmatrix}
+                    2 & -1 & 0\\
+                    -1 & 1 & 1\\
+                    0 & 1 & 2
+                \end{bmatrix}.
+    \]
+\end{problem}
+\begin{solution}
+    Let's start with skeletonization and then find the pseudoinverse matrix by the formula
+    \[
+        A^+ = G^*(GG^*)^{-1}(F^*F)^{-1}F^*, 
+    \]
+    \[
+        A = \Vast[
+            \overbrace{\fbox{$\begin{matrix}
+                2 & -1 \\
+                -1 & 1 \\
+                0 & 1
+            \end{matrix}$}}^{F} \hspace*{0.25cm} \begin{matrix}
+                0 \\
+                1 \\
+                2
+            \end{matrix}\Vast] \Rightarrow \begin{bmatrix}
+                2 & -1 & 0 \\
+                0 & \medmath{\frac{1}{2}} & 1 \\
+                0 & 1 & 2
+            \end{bmatrix} \Rightarrow \begin{bmatrix}
+                1 & -\medmath{\frac{1}{2}} & 0\\
+                0 & \medmath{\frac{1}{2}} & 1\\
+                0 & 0 & 0
+            \end{bmatrix} \Rightarrow \Vast[
+                \begin{array}{c}
+                    \overbrace{\fbox{$\begin{matrix}
+                        1 & 0 & 1\\
+                        0 & 1 & 2
+                    \end{matrix}$}}^{G}\\
+                    \hspace*{0.18cm} \begin{matrix}
+                        0 & 0 & 0\\\\
+                    \end{matrix}
+                \end{array}
+                \Vast].
+    \]
+    Let's check
+    \[
+        F \cdot G = \begin{bmatrix}
+            2 & -1 \\
+            -1 & 1 \\
+            0 & 1
+        \end{bmatrix} \cdot \begin{bmatrix}
+            1 & 0 & 1 \\
+            0 & 1 & 2
+        \end{bmatrix} = \begin{bmatrix}
+            2 & -1 & 0\\
+            -1 & 1 & 1\\
+            0 & 1 & 2
+        \end{bmatrix}.
+    \]
+    Correct. Now we need to find the pseudoinverse matrix
+    \[
+        G^*(G G^*)^{-1} = \begin{bmatrix}
+            1 & 0 \\
+            0 & 1 \\
+            1 & 2
+        \end{bmatrix} \cdot \left(\begin{bmatrix}
+            1 & 0 & 1\\
+            0 & 1 & 2
+        \end{bmatrix} \cdot \begin{bmatrix}
+            1 & 0 \\
+            0 & 1\\
+            1 & 2
+        \end{bmatrix}\right)^{-1} = \begin{bmatrix}
+            1 & 0\\
+            0 & 1\\
+            1 & 2
+        \end{bmatrix} \cdot \dfrac{1}{6} \begin{bmatrix}
+            5 & -2 \\
+            -2 & 2
+        \end{bmatrix} = \dfrac{1}{6}\cdot\begin{bmatrix}
+            5 & -2 \\
+            -2 & 2\\
+            1 & 2
+        \end{bmatrix},  
+    \]
+    \begin{eqnarray*}
+        (F^* F)^{-1}  F^* &=& \left(\begin{bmatrix}
+            2 & -1 & 0\\
+            -1 & 1 & 1
+        \end{bmatrix} \cdot \begin{bmatrix}
+            2 & -1 \\ -1 & 1 \\
+            0 & 1
+        \end{bmatrix}\right)^{-1}\cdot \begin{bmatrix}
+            2 & -1 & 0\\
+            -1 & 1 & 0
+        \end{bmatrix} = \begin{bmatrix}
+            5 & -3 \\
+            -3 & 3
+        \end{bmatrix}^{-1} \begin{bmatrix}
+            2 & -1 & 0\\
+            -1 & 1 & 0
+        \end{bmatrix} = \\ &=& \dfrac{1}{6} \begin{bmatrix}
+            3 & 3 \\
+            3 & 5
+        \end{bmatrix} \cdot \begin{bmatrix}
+            2 & -1 & 0\\
+            -1 & 1 & 0
+        \end{bmatrix} = \dfrac{1}{6} \begin{bmatrix}
+            3 & 0 & 0\\
+            1 & 2 & 0
+        \end{bmatrix}.
+    \end{eqnarray*}
+    All things considered, we can obtain pseudoinverse matrix $A^+$
+    \[
+         
+        A^+=\dfrac{1}{36} \begin{bmatrix}
+            5 & -2 \\
+            -2 & 2\\
+            1 & 2
+        \end{bmatrix} \cdot \begin{bmatrix}
+            3 & 0 & 0\\
+            1 & 2 & 0
+        \end{bmatrix} = \dfrac{1}{36} \begin{bmatrix}
+            13 & -4 & 0\\
+            -4 & 4 & 0\\
+            5 & 4 & 0
+        \end{bmatrix}.
+    \]
+\end{solution}
+    \begin{note}{}{}
+        Matrix $(G G^*)$ is called Gramm matrix and contains results of scalar products. 
+    \end{note}
+
+    \begin{definition}{SVD}{}
+        
+    Singular Value Decomposition of matrix $A\in M_{m\times n}(\C)$ is a decomposition of a kind
+    \[
+        A = U\Sigma V^*,  
+    \]
+    where $U \in M_{m\times m}(\C)$ and $V \in M_{n\times n}(\C)$ are unitary matrices
+    \begin{gather*}
+        U^*U = UU^*=UU^{-1} = I\\
+        V^*V = VV^*=VV^{-1} = I
+    \end{gather*}
+    and $\Sigma \in M_{m\times n}(\C)$ is a diagonal matrix of a kind
+    \[
+        \scalebox{1.5}{$\Sigma = $}
+        \left[\begin{tabular}{clp{0.1cm}p{0.1cm}}
+            \multicolumn{1}{l}{\scalebox{1.25}{$\sigma_1$}}        &         & & \multicolumn{1}{l}{\multirow{3}{*}{\begin{tikzpicture}[x=0.55pt,y=0.55pt,yscale=-1,xscale=1]
+                    \draw  [line width=1.75]  (304.32,138.5) .. controls (312.66,138.5) and (319.43,147.68) .. (319.43,159) .. controls (319.43,170.32) and (312.66,179.5) .. (304.32,179.5) .. controls (295.98,179.5) and (289.21,170.32) .. (289.21,159) .. controls (289.21,147.68) and (295.98,138.5) .. (304.32,138.5) -- cycle ;
+                    \end{tikzpicture}}} \\ %! 
+\multicolumn{1}{l}{}         & \scalebox{1.25}{$\sigma_2$}       & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}                     \\ %! 
+            \multicolumn{2}{c}{\multirow{2}{*}{
+                \begin{tikzpicture}[x=0.55pt,y=0.55pt,yscale=-1,xscale=1]
+                    \draw  [line width=1.75]  (304.32,138.5) .. controls (312.66,138.5) and (319.43,147.68) .. (319.43,159) .. controls (319.43,170.32) and (312.66,179.5) .. (304.32,179.5) .. controls (295.98,179.5) and (289.21,170.32) .. (289.21,159) .. controls (289.21,147.68) and (295.98,138.5) .. (304.32,138.5) -- cycle ;
+                    \end{tikzpicture}
+            }} & \scalebox{1.25}{$\ddots$}              & \multicolumn{1}{l}{}  \\ %!
+            \multicolumn{2}{c}{}                   &                       & \multicolumn{1}{l}{\scalebox{1.25}{$\sigma_r$}}   \\[0.05cm] %!
+ 
+            \multicolumn{4}{c}{\begin{tikzpicture}[x=0.55pt,y=0.55pt,yscale=-1,xscale=1]
+                \draw [line width=1.75]  (246,143.5) .. controls (246,133.56) and (273.41,125.5) .. (307.21,125.5) .. controls (341.02,125.5) and (368.43,133.56) .. (368.43,143.5) .. controls (368.43,153.44) and (341.02,161.5) .. (307.21,161.5) .. controls (273.41,161.5) and (246,153.44) .. (246,143.5) -- cycle ;
+                \end{tikzpicture}
+                }                                                                        
+            \end{tabular}\right],
+    \]
+    where $\sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_r$ -- singular values and $r = \rank A$.
+    \end{definition}
+    \begin{theorema}{How to find SVD}{}
+        The eigenvectors of $A^*A$ make up the columns of $V$ , the eigenvectors of $AA^*$  make up the columns of $U$, the singular values in $\Sigma$ are square roots of eigenvalues from  $AA^*$ or  $A^*A$. 
+    \end{theorema}
+    
+    \begin{theorema}{How to find pseudoinverse using SVD}{}
+        Let $U\Sigma V^*$ be the SVD of a matrix $A\in M_{m\times n}(\C)$, then
+        $$
+            A^+=U\Sigma^+ V^*.
+        $$
+    \end{theorema}
+
+\begin{problem}{Singular Value Decomposition}
+Find singular value decomposition of a matrix
+\[
+    A = \begin{bmatrix}
+        3 & 3 \\
+        0 & 0 \\
+        4 & 4
+    \end{bmatrix}.  
+\]
+\end{problem}
+\begin{solution}
+    Let's start with finding $\Sigma \in M_{2\times 2}(\R)$
+    \[
+        A^* A = \begin{bmatrix}
+            3 & 0 & 4\\
+            3 & 0 & 4
+        \end{bmatrix} \cdot \begin{bmatrix}
+            3 & 3\\
+            0 & 0\\
+            4 & 4
+        \end{bmatrix} = \begin{bmatrix}
+            25 & 25 \\ 
+            25 & 25
+        \end{bmatrix}.   
+    \]
+    Next step is to find eigenvalues and eigenvectors for the matrix $A^* A$.
+    \[
+        (A^* A - \lambda_2 I) \vec v_2=0
+        \Leftrightarrow
+        \det \left(\begin{bmatrix}
+            25-\lambda & 25 \\
+            25 & 25-\lambda
+        \end{bmatrix}\right) = 0 
+        \Leftrightarrow \lambda^2 - 50\lambda = 0 
+        \Leftrightarrow \lambda_1 = 50, \ \lambda_2 = 0.
+    \]
+    Hence singular values are equal to $\sigma_1 = \sqrt{50}, \ \sigma_2 = 0$ and 
+    \[
+        \scalebox{1.5}{$\Sigma$} = \begin{bmatrix}
+            \sqrt{50} & 0\\
+            0 & 0 \\
+            0 & 0
+        \end{bmatrix}.  
+    \]
+    Let's  find  $V \in M_{2\times 2}(\R)$. We calculate eigenvalues of previously  obtained matrix $A^* A$.
+    \[
+        (A^* A - \lambda_1 I) \vec v_1 = 0
+        \Leftrightarrow
+        \begin{bmatrix}
+            -25 & 25 \\
+            25 & -25
+        \end{bmatrix} \vec v_1 = 0.
+    \]
+    One of the solutions is  $\vec v_1 = \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$. We need to normalize it, so $\vec v_1 = \dfrac{\sqrt{2}}{2}\begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$. Similarly by solving $(A^* A - \lambda_2 I) \vec v_2-0$, we get $\vec v_2 = \dfrac{\sqrt 2}{2}\begin{bmatrix}
+        -1 \\ 1
+    \end{bmatrix} $.  Combining  $\vec v_1$ and $\vec v_2$, we get
+    \[
+        V = \dfrac{\sqrt{2}}{2} \begin{bmatrix}
+            1 & -1\\ 1 & 1
+        \end{bmatrix}.  
+    \] 
+    Let's find matrix $U \in M_{3\times 3}(\R)$, which is constructed of a new matrix $AA^*$ eigenvectors. 
+    \[
+        AA^* = \begin{bmatrix}
+            3 & 3 \\
+            0 & 0\\
+            4 & 4
+        \end{bmatrix} \cdot \begin{bmatrix}
+            3 & 0 & 4\\
+            3 & 0 & 4
+        \end{bmatrix} = \begin{bmatrix}
+            18 & 0 & 24\\
+            0 & 0 & 0\\
+            24 & 0 & 32
+        \end{bmatrix}.
+    \]
+    We calculate the new matrix $AA^*$  eigenvalues
+    \[      
+        (AA^*-\lambda_1 I)\vec u_1 = 0
+        \Leftrightarrow
+        \begin{bmatrix}
+            -32 & 0 & 24\\
+            0 & -50 & 0\\
+            24 & 0 & -18
+        \end{bmatrix}\vec u_1 = 0.
+        \]
+    Solving by Gaussian elimination
+    \[
+        \begin{bmatrix}[ccc|c]
+            -4 & 0 & 3 & 0\\
+            0 & -1 & 0 & 0\\
+            4 & 0 & -3 & 0
+        \end{bmatrix}  \sim \begin{bmatrix}[ccc|c]
+            -1 & 0 & \medmath{\frac{3}{4}} & 0\\
+            0 & 1 & 0 & 0\\
+            0 & 0 & 0 & 0
+        \end{bmatrix} \Rightarrow \vec u_1 = \dfrac{4}{5}\begin{bmatrix}
+        \medmath{3} \\[0.2cm] 0 \\ 4
+    \end{bmatrix}.
+    \]
+    Similarly by solving $(AA^*-\lambda_2 I)\vec u=0$,  we get
+    \[
+        \begin{bmatrix}[ccc|c]
+            18 & 0 & 24 & 0\\
+            0 & 0 & 0 & 0\\
+            24 & 0 & 32 & 0
+        \end{bmatrix}  \sim \begin{bmatrix}[ccc|c]
+            1 & 0 & \medmath{\frac{4}{3}} & 0\\
+            0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0
+        \end{bmatrix} \Rightarrow 
+        \vec u_2 = 
+        \begin{bmatrix}
+            0 \\ 1 \\ 0
+        \end{bmatrix},
+        \vec u_3 = 
+        \dfrac{1}{5}
+        \begin{bmatrix}
+            -4 \\ 0 \\ 3
+        \end{bmatrix}.
+    \]
+    All things considered, the result of singular value decomposition is the following
+    $$
+    A=U\Sigma V^*,
+  $$
+  where 
+    \[
+        U = \dfrac{1}{5}\begin{bmatrix}
+            3 & 0 & -4\\
+            0 & 5 & 0\\
+            4 & 0 & 3
+        \end{bmatrix}, \vspace*{0.5cm} \Sigma = \begin{bmatrix}
+            \sqrt{50} & 0\\
+            0 & 0\\
+            0 & 0
+        \end{bmatrix}, \vspace*{0.5cm} V = \frac{\sqrt{2}}{2} \begin{bmatrix}
+            1 & -1 \\
+            1 & 1
+        \end{bmatrix}.
+    \]
+\end{solution}
