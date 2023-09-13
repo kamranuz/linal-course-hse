@@ -20,4 +20,8 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 
 If you have questions or need assistance with the course, you can reach out to Professor Dmitri Piontkovski.
 
+**Authors of this Repository:**
+- Ryabykin Aleksey ([Telegram](https://t.me/addicted_by))
+- Polina Moskvicheva ([Telegram](https://t.me/gumanitariinenuzhny))
+
 We wish you a successful and rewarding experience in the Linear Algebra for Data Science course! Good luck with your studies.
