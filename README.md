@@ -11,10 +11,10 @@ In the lecture course, we consider some topics of linear algebra beyond the stan
 
 The course consists of lectures and seminars. Materials for subsequent lectures and seminars will be made available as the course progresses.
 **Lectures**
-1. [Lecture 1: Intro, Pseudoinverse and Skeletonization](https://github.com/kamranuz/linal-course-hse/blob/master/lecture-notes/lecture01-pseudoinverse.pdf) 
+1. [Lecture 1: Intro, Pseudoinverse and Skeletonization](https://raw.githubusercontent.com/kamranuz/linal-course-hse/masterlecture-notes/lecture01-pseudoinverse.pdf) 
 
 **Seminars**
-1. [Seminar 1: Skeletonization and SVD](https://github.com/kamranuz/linal-course-hse/blob/master/seminars/seminar01-svd.pdf) 
+1. [Seminar 1: Skeletonization and SVD](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar01-svd.pdf) 
 
 ## Contact Information
 
