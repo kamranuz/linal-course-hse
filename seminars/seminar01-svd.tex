@@ -115,7 +115,6 @@
     \end{eqnarray*}
     All things considered, we can obtain pseudoinverse matrix $A^+$
     \[
-         
         A^+=\dfrac{1}{36} \begin{bmatrix}
             5 & -2 \\
             -2 & 2\\
@@ -324,3 +323,30 @@ Find singular value decomposition of a matrix
         \end{bmatrix}.
     \]
 \end{solution}
+\begin{note}
+    We could find more simple decomposition of the matrix $A$ by omitting all calculations with zero singular values. Such decomposition is called compact version of the SVD
+    $$
+        A=U_{r}\Sigma_{r} V_{r}^*,\quad r=\rank A.
+    $$
+    For example, matrix $A$ from the previous problem has following compact SVD
+    $$
+        A=U_{r}\Sigma_{r} V_{r}^*,
+    $$
+    where
+    \[
+        U_{r} = \dfrac{1}{5}\begin{bmatrix}
+            3 \\
+            0 \\
+            4  
+        \end{bmatrix}
+            , \vspace*{0.5cm} \Sigma_{r} = 
+        \begin{bmatrix}
+            \sqrt{50}
+        \end{bmatrix}
+            , \vspace*{0.5cm} V_{r} = \frac{\sqrt{2}}{2} 
+        \begin{bmatrix}
+            1 \\
+            1 
+        \end{bmatrix}.
+    \]
+\end{note}
