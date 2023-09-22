@@ -1,0 +1,353 @@
+\setcounter{section}{1}
+\section{Pseudosolutions and its applications. Linear regression.}
+\subsection*{Intuition behind pseudosolutions}
+    \par 
+    Let's recall that the system of linear equations (SLE) can be represented using the following notation
+    \[
+        A\vec{x} = b,
+    \]
+    where
+    \[
+        A = 
+            \begin{bmatrix}
+                a_{11} & \cdots & a_{1n}\\
+                \vdots & \ddots & \vdots\\
+                a_{m1} & \cdots & a_{mn} 
+            \end{bmatrix}
+        \in M_{m\times n}(\C), \quad 
+        \vec{b} = \begin{bmatrix}  b_1 \\\vdots \\b_,\end{bmatrix} \in \C^m, \quad
+        \vec{x} = \begin{bmatrix}  x_1 \\\vdots \\x_n\end{bmatrix} \in \C^n.
+    \]
+    Let's recall possible solution sets of SLE
+    \begin{theorema}{Solution sets of SLE}
+        A linear system of equations may behave in any one of three possible ways
+        \begin{enumerate} 
+            \item The system is definite - has a single unique solution.
+            \item The system is indefinite - has infinitely many solutions.
+            \item The system is inconsistent - has no solution.
+        \end{enumerate}
+    \end{theorema}
+     \Ex Definite system of the square system.
+    
+        If $A \in M_{n\times n}(\C), \ \rank A = n$, then we can easily obtain unique solution $\vec{x}$ by inverting the matrix of initial coefficients
+            \[
+                \vec{x}  = A^{-1}\vec{b}.
+            \]\\
+    We want to generalize this result for any systems (definite, indefinite and inconsistent of any size). Let's outline intuition of this generalization in the following examples.
+\subsubsection*{Definite system}
+    \Ex If $A \in M_{m\times n}(\C), \rank A=n$, then there exist unique solution $\vec{x}$. For example, consider a system 
+        \begin{wrapfigure}[15]{r}{0.4\columnwidth}
+            \includegraphics[width=0.4\columnwidth]{lectures/images/definite_system.png}
+            \caption*{\scriptsize{Example of definite system.}}
+            \label{fig:definite_system}
+        \end{wrapfigure}
+        \[
+            \left\{
+                \begin{array}{l}
+                    x-y = 0\\
+                    x+y = 2\\
+                    2x-y = 1
+                \end{array}.
+            \right.  
+        \]
+        The system has only one solution in the point $\vec{x} = \begin{bmatrix}1\\ 1\end{bmatrix}$. However, we would like to generalize the method of obtaining a solution in such a way that it looks similar to the first example (definite system of square system)
+        \[
+            \vec{x} = ?\cdot \vec{b}.  
+        \]
+    
+        And looking ahead we can obtain such a factor to express solution that way. But now let's get a broader generalization.\newpage
+
+\subsubsection*{Indefinite system}
+    \Ex Consider a system~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    \begin{wrapfigure}[15]{r}{0.4\columnwidth}
+        \includegraphics[height=0.4\columnwidth, width=0.4\columnwidth]{lectures/images/indefinite_system.png}
+        \caption*{\scriptsize{Example of indefinite system.}}
+    \end{wrapfigure}
+    \[
+        \left\{
+            \begin{array}{l}
+                2x-y=1\\
+                4x-2y=2
+            \end{array}.
+        \right.  
+    \]
+    It is not so obvious to choose a specific solution here because a whole family of solutions of the following form 
+    $\vec{x} = 
+    \begin{bmatrix}
+        x\\1-2x
+    \end{bmatrix}$ is suitable for us. At the same time, we would like express solution of the system in the following form
+    \[
+        \vec{x} = ?\cdot \vec{b},
+    \]
+    which assumes one solution, not infinite. For this reason, we need to choose the best solution out of infinite. In other words, we need to define "optimal" solution. Our intuition hints us to a solution point which is the closest to the origin. \\\\\\\\
+    
+
+\subsubsection*{Inconsistent system}    
+     \Ex Consider a system~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        \begin{wrapfigure}[8]{r}{0.4\columnwidth}
+            \includegraphics[width=0.4\columnwidth]{lectures/images/inconsistent_system.png}
+            \caption*{\scriptsize{Example of inconsistent system.}}
+            \label{fig:inconsistent_with_vectors}
+        \end{wrapfigure}  
+        $$
+            \left\{
+                \begin{array}{c}
+                    2x-y=0,\\
+                    2x-y=1
+                \end{array}
+            \right.  
+        $$
+        The system does not have solution. Geometrically the system describes two parallel lines. Our intuition hints us to choose a point on a line right in middle of the parallel lines. However, it is still a whole family of solutions that can be the answer to the request of the product or business problem. 
+        \newpage
+\subsubsection*{Pseudosolution}
+    \begin{definition}{Pseudosolution}{}
+        Consider a system of a linear equations $A\vec{x} = \vec{b}$. A vector $\vec{u} \in \C^n$ is called a pseudosolution (least square solution), if
+        \[
+            \left| A\vec{x} - \vec{b} \right| \ge \left| A\vec{u} - \vec{b} \right|,
+            \quad
+            \forall \vec{x} \in \C^n. 
+        \]
+        That is, vector $f(\vec{x}) =\begin{bmatrix}f_1\\ \vdots\\f_n\end{bmatrix}= A\vec{x}-\vec{b}$ reaches it's minimum length at $\vec{x}=\vec{u}$. That is, $\vec{x}=\vec{u}$ is the solution of the following problem
+        $$|f(x)|^2 = |f_1|^2 + \ldots + |f_n|^2 \rightarrow \mathop{min}_{\vec{x}}.$$ 
+    \end{definition}
+    \begin{theorema}{$\vec{u} = A^+\vec{b}$}{}
+        The vector $\vec{u} = A^+\vec{b}$ is a pseudosolution of the system of linear equations $A\vec{x} = \vec{b}$. Moreover, among all pseudosolutions, the vector $\vec{u}$ is the unique pseudosolution with minimal length.
+    \end{theorema}
+    \begin{proposition}{}{}
+        If $\hat{x}$ is a solution, then it is a pseudosolution.
+    \end{proposition}
+    \begin{proof}
+        $A\hat{x} - \vec{b} = 0 \Longrightarrow \left| A\hat{x} - \vec{b} \right| = 0 = \min |f_x|^2.$
+    \end{proof}
+    \vspace*{0.2cm}
+    \begin{proposition}{}{}
+        \begin{tabular}{|l|l|}
+            \hline
+            Type of a system & Solution \\ \hline
+            definite         &      $\hat{x}=A^+\vec{b}$  is the solution  \\ \hline
+            indefinite       &   $\hat{x}=A^+\vec{b}$  is the solution of minimal length       \\ \hline
+            inconsistent     &    $\hat{x}=A^+\vec{b}$  is the pseudosolution  of minimal length    \\ \hline
+        \end{tabular}
+    \end{proposition}
+    \begin{lemma}{}{}
+        $\im (AA^+-I) \perp \im (A) $.
+    \end{lemma}
+    \begin{proof}    
+        Let us denote $ AA^+-I$ by $M$. Let us denote vector columns that generate $\im(M)$ and $\im(A)$ by $M^i$ and $A^j$ respectively. Then the following holds
+        \begin{eqnarray}
+            &&\im(M)  \perp \im (A) \label{1}\\
+            \Leftrightarrow &&M^i \perp A^j,\quad \forall i,j\nonumber\\
+            \Leftrightarrow &&(M^i, A^j)=0,\quad \forall i,j\nonumber\\
+            \Leftrightarrow &&(M^i)^*\cdot A^j=0,\quad \forall i,j\nonumber\\
+            \Leftrightarrow &&M^*A=0,\label{2}
+        \end{eqnarray}
+        which means that by proving (\ref{2}), we get (\ref{1}). Let us prove (\ref{2}).
+        \begin{eqnarray}
+            &&M^* A=(AA^+-I)^* A
+            =((AA^+)^*-I^*) 
+            =(AA^+)^*A-I^* A
+            \stackrel{\text{axiom III}}{=}AA^+A-I
+            \stackrel{\text{axiom I}}{=}A-A=0\nonumber.
+        \end{eqnarray}
+    \end{proof}
+    \begin{theorema}{Pythagoras}{}
+        Suppose $\vec{a} \perp \vec{b}$, then for $\vec{c} = \vec{a} + \vec{b}$, we have $|\vec{c}|^2 = |\vec{a}|^2 + |\vec{b}|^2.$ In particular $|\vec{c}| \geq |\vec{b}|$. The equality holds only for $\vec{a} = \vec{0}$.
+    \end{theorema}      
+    \begin{proof}
+        We leave as an exercise for the reader.
+    \end{proof}
+    \begin{proof}(of Theorem $\vec{u} = A^+\vec{b}$)~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~~ ~ ~ ~ ~ ~ ~
+        First, let us prove that $\vec{u} = A^+\vec{b}$ is a pseudosolution. Let us denote
+        $$
+            \vec{A}_x:= A(\vec{x}-\vec{u})=A\vec{x}-A\vec{u}\in \C^n,\quad
+            \vec{B}  := (AA^+-I)\vec{b}  = A\vec{u}-\vec{b}\in \C^n,\quad
+            \vec{C}  := \vec{A}_x+\vec{B} =A\vec{x}-\vec{b}.
+        $$
+        
+         Using Lemma, we get $\vec{A}_x\perp\vec{B}$. Using Pythagoras theorem, we get
+         \begin{eqnarray}
+            |C|&\ge&|B|\nonumber\\
+            &\Leftrightarrow&\nonumber\\ 
+            |A\vec{x}-\vec{b}|&\ge&|A\vec{u}-\vec{b}|,\quad \forall \vec{x}\in \C^n,\nonumber
+         \end{eqnarray}
+         which means that $\vec{u}$ is a pseudosolution.
+    
+        Secondly, let us prove that $\vec{u} = A^+\vec{b}$ is the unique pseudosolution with minimal length.  Let us denote $w:=\vec{x}-\vec{u}$. Suppose $\vec{x}$ is another pseudosolution, which means that 
+        \begin{eqnarray}   
+            A\vec{x}=A\vec{u}
+            \Leftrightarrow A(\vec{x}-\vec{u})=0
+            \Leftrightarrow Aw=0.\label{aw}
+        \end{eqnarray}
+        Let us consider the following
+        \begin{eqnarray}
+          \left(\vec{u}, \vec{w}\right) 
+          &=& \vec{u}^* \vec{w} 
+          = (A^+\vec{b})^* \vec{w} 
+          = \vec{b}^*A^{+^*} \vec{w}\nonumber\\
+          &\overset{\rom{2}}{=}& \vec{b}^*\left(A^+AA^+\right)^*\vec{w}  
+          = \vec{b}^*A^{+^*}\left(A^+A\right)^*\vec{w}  \nonumber\\
+          &\overset{\rom{4}}{=}& \vec{b}^*A^{+^*}A^+A\vec{w}\nonumber\\
+          &=&\vec{b}^*A^{+^*}A^+\underbrace{A\vec{w}}_{0} \overset{(\ref{aw})}{=} 0,\nonumber
+        \end{eqnarray}
+        which means that $u\perp w$. Using Pythagoras theorem, we get $|\vec{x}|\ge|\vec{u}|$, which means that $\vec{u}$ is pseudosolution with minimal length. By Pythagoras theorem $|\vec{x}|=|\vec{u}|\Leftrightarrow\vec{w}=0\Leftrightarrow \vec{x}=\vec{u}$, which means that $\vec{u}$ is unique.
+    \end{proof}
+    \Ex
+    Find pseudosolution of the following inconsistent system
+    \[
+        A = \begin{bmatrix}
+            2 & 1\\
+            2 & 1
+        \end{bmatrix}, \hspace*{0.5cm} \vec{b} = \begin{bmatrix}
+            3 \\ 6
+        \end{bmatrix}  
+    \]
+    
+    Then pseudosolution can be found by the formula
+    \[
+        \hat{x} = A^+\vec{b}.  
+    \]
+    
+    Pseudoinverse matrix to $A$ can be obtained by
+    \begin{gather*}
+        A^+ = \left( \begin{bmatrix}
+            1 \\ 1
+        \end{bmatrix} \cdot \begin{bmatrix}
+            2 & 1
+        \end{bmatrix}\right)^+ = \begin{bmatrix}
+            2 & 1
+        \end{bmatrix}^+ \cdot \begin{bmatrix}
+            1 \\ 1
+        \end{bmatrix}^+ = \dfrac{1}{2}\cdot\dfrac{1}{5} \begin{bmatrix}
+            2 & 2 \\
+            1 & 1
+        \end{bmatrix} = \dfrac{1}{10} \begin{bmatrix}
+            2 & 2 \\
+            1 & 1
+        \end{bmatrix}
+    \end{gather*}
+    
+    Then we can get a pseudosolution
+    \[
+        \hat{x} = \dfrac{1}{10} \begin{bmatrix}
+            2 & 2 \\
+            1 & 1
+        \end{bmatrix} \cdot \begin{bmatrix}
+            3 \\ 
+            6
+        \end{bmatrix} = \dfrac{1}{10} \begin{bmatrix}
+            18 & 9
+        \end{bmatrix}
+    \]
+    \begin{proposition}{}{}
+        $\vec{x}\ $ is a pseudosolution $\Leftrightarrow \vec{x}\ $ is a solution of the "normal" system of a kind
+        \[
+            A^*A\vec{x} = A^*\vec{b}.  
+        \]
+    \end{proposition}
+    
+    \begin{proposition}{}{}
+        All pseudosolutions of $A\vec{x} = \vec{b}$ are given by the formula
+        \[
+            \vec{x} = A^+\vec{b} - (A^+A-I)\vec{y},  
+        \]
+        where $\vec{y} \in \C^n$ -- an arbitrary vector.
+    \end{proposition}
+    
+    \Ex
+    Find all pseudosolutions of the system from previous example. 
+    
+    We have already obtained one pseudosolution
+    \[
+        \hat{x} = \dfrac{1}{10}\begin{bmatrix}
+            18\\
+            9
+        \end{bmatrix}.  
+    \]
+    
+    Now we need to obtain $A^+A-I$
+    \[
+        A^+A-I = \dfrac{1}{10} \begin{bmatrix}
+            2 & 2 \\
+            1 & 1
+        \end{bmatrix} \cdot \begin{bmatrix}
+            2 & 1\\
+            2 & 1
+        \end{bmatrix} - \begin{bmatrix}
+            1 & 0\\
+            0 & 1
+        \end{bmatrix} = \dfrac{1}{10}\begin{bmatrix}
+            8 & 4 \\
+            4 & 2
+        \end{bmatrix} - \begin{bmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{bmatrix} = \begin{bmatrix}
+            -0.2 & 0.4 \\
+            0.4 & -0.8
+        \end{bmatrix}.
+    \]
+    
+    Finally, all pseudosolutions are given by the formula
+    \[
+        \vec{x} = \dfrac{1}{10}\begin{bmatrix}
+            18 \\ 9
+        \end{bmatrix} - \begin{bmatrix}
+            -0.2 & 0.4\\
+            0.4 & -0.8
+        \end{bmatrix}  \begin{bmatrix}
+            y_1 \\
+            y_2
+        \end{bmatrix} = \begin{bmatrix}
+            1.8 + 0.2y_1 - 0.4 y_2\\
+            0.9 - 0.4y_1 + 0.8y_2
+        \end{bmatrix}.
+    \]
+    % \subsection*{Linear regression problem}
+    
+    
+    % \begin{wrapfigure}{l}{1\columnwidth}
+    %     \scalebox{1.5}{\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    %         %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+            
+    %         %Straight Lines [id:da021044538065793983] 
+    %         \draw    (100.4,150.71) -- (100.4,42.71) ;
+    %         \draw [shift={(100.4,39.71)}, rotate = 90] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (5.36,-2.57) -- (0,0) -- (5.36,2.57) -- (3.56,0) -- cycle    ;
+    %         %Straight Lines [id:da768552366016573] 
+    %         \draw    (89.73,140.05) -- (216.73,140.05) ;
+    %         \draw [shift={(219.73,140.05)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (5.36,-2.57) -- (0,0) -- (5.36,2.57) -- (3.56,0) -- cycle    ;
+    %         %Shape: Circle [id:dp4077752415315412] 
+    %         \draw   (111.06,106.53) .. controls (111.06,104.62) and (112.62,103.06) .. (114.53,103.06) .. controls (116.45,103.06) and (118,104.62) .. (118,106.53) .. controls (118,108.45) and (116.45,110) .. (114.53,110) .. controls (112.62,110) and (111.06,108.45) .. (111.06,106.53) -- cycle ;
+    %         %Shape: Circle [id:dp2037573912425814] 
+    %         \draw   (123.99,131.49) .. controls (123.99,129.57) and (125.55,128.02) .. (127.46,128.02) .. controls (129.38,128.02) and (130.93,129.57) .. (130.93,131.49) .. controls (130.93,133.4) and (129.38,134.96) .. (127.46,134.96) .. controls (125.55,134.96) and (123.99,133.4) .. (123.99,131.49) -- cycle ;
+    %         %Shape: Circle [id:dp45400412163463866] 
+    %         \draw   (162.13,73.2) .. controls (162.13,71.28) and (163.68,69.73) .. (165.6,69.73) .. controls (167.51,69.73) and (169.07,71.28) .. (169.07,73.2) .. controls (169.07,75.11) and (167.51,76.67) .. (165.6,76.67) .. controls (163.68,76.67) and (162.13,75.11) .. (162.13,73.2) -- cycle ;
+    %         %Shape: Circle [id:dp5342492536064438] 
+    %         \draw   (131.06,76.53) .. controls (131.06,74.62) and (132.62,73.06) .. (134.53,73.06) .. controls (136.45,73.06) and (138,74.62) .. (138,76.53) .. controls (138,78.45) and (136.45,80) .. (134.53,80) .. controls (132.62,80) and (131.06,78.45) .. (131.06,76.53) -- cycle ;
+    %         %Shape: Circle [id:dp2972731544634346] 
+    %         \draw   (152.4,113.2) .. controls (152.4,111.28) and (153.95,109.73) .. (155.87,109.73) .. controls (157.78,109.73) and (159.33,111.28) .. (159.33,113.2) .. controls (159.33,115.11) and (157.78,116.67) .. (155.87,116.67) .. controls (153.95,116.67) and (152.4,115.11) .. (152.4,113.2) -- cycle ;
+    %         %Straight Lines [id:da2595807846962981] 
+    %         \draw    (101.06,140.05) -- (186.4,51.6) ;
+    %         %Shape: Circle [id:dp7278044041658378] 
+    %         \draw   (183.73,70.4) .. controls (183.73,68.48) and (185.28,66.93) .. (187.2,66.93) .. controls (189.11,66.93) and (190.67,68.48) .. (190.67,70.4) .. controls (190.67,72.31) and (189.11,73.87) .. (187.2,73.87) .. controls (185.28,73.87) and (183.73,72.31) .. (183.73,70.4) -- cycle ;
+    %         %Straight Lines [id:da4346572573275653] 
+    %         \draw    (117.75,109.16) -- (123.75,115.16) ;
+    %         \draw [shift={(123.75,115.16)}, rotate = 225] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         \draw [shift={(117.75,109.16)}, rotate = 225] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         %Straight Lines [id:da18387194843836618] 
+    %         \draw    (124.32,128.59) -- (118.84,122.78) ;
+    %         \draw [shift={(118.84,122.78)}, rotate = 46.7] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         \draw [shift={(124.32,128.59)}, rotate = 46.7] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         %Straight Lines [id:da2364994210811795] 
+    %         \draw    (137.76,79.01) -- (148.9,89.87) ;
+    %         \draw [shift={(148.9,89.87)}, rotate = 224.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         \draw [shift={(137.76,79.01)}, rotate = 224.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         %Straight Lines [id:da8931600019469914] 
+    %         \draw    (141.51,98.78) -- (152.9,110.73) ;
+    %         \draw [shift={(152.9,110.73)}, rotate = 226.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         \draw [shift={(141.51,98.78)}, rotate = 226.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         %Straight Lines [id:da2901806653749395] 
+    %         \draw    (177.33,62.2) -- (184.19,68.49) ;
+    %         \draw [shift={(184.19,68.49)}, rotate = 222.51] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         \draw [shift={(177.33,62.2)}, rotate = 222.51] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
+    %         \end{tikzpicture}}
+    % \end{wrapfigure} 
