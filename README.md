@@ -10,6 +10,7 @@ In the lecture course, we consider some topics of linear algebra beyond the stan
 ## Course Contents
 
 The course consists of lectures and seminars. Materials for subsequent lectures and seminars will be made available as the course progresses.
+
 **Lectures**
 1. [Lecture 1: Intro, Pseudoinverse and Skeletonization](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture01-pseudoinverse.pdf) 
 1. [Lecture 2: Pseudosolutions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture02-pseudosolutions.pdf) 
