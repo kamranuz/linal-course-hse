@@ -1,3 +1,4 @@
+\fancyfoot[R]{v1.0.1}
 \section{Difference between fundamental and applied linear algebra. Problems with the real data. Pseudoinverse matrices. Skeletonization.}
     \par 
     Let's consider some of the standard linear algebra problems, for example, solving the systems of linear equations. It can be written:
@@ -41,33 +42,35 @@
     \subsubsection*{Indefinite (indeterminate) system}
     For example, it means system with less equations than variables or linearly dependent equations. It can be some system of a kind:
     \[
-        \left\{ \begin{array}{c}
-            x_1 + 2x_2 = 3,\\
-            2x_1 + 4x_2 = 6
-        \end{array}
-            \right.  
+        \left\{
+            \begin{array}{l}
+                2x-y=1\\
+                4x-2y=2
+            \end{array}.
+        \right.  
     \]
     So we have two lines of the same kind. The problem is how to pick one value of the vector $\vec{x}$. 
-    \begin{wrapfigure}[12]{l}{0.5\columnwidth}
-        \includegraphics[height=0.235\columnwidth, width=0.5\columnwidth]{lectures/images/indefinite_system.png}
+    \begin{wrapfigure}[11]{r}{0.25\columnwidth}
+        \includegraphics[height=0.25\columnwidth, width=0.25\columnwidth]{lectures/images/indefinite_system.png}
         \caption*{\scriptsize{Example of indefinite system.}}
         \label{fig:indefinite_system}
     \end{wrapfigure}
     Mathematically, we can pick every point from this line, but, for example, negative values (point A), obviously looks strange or even inappropriate for our case. Or, for example, you can pick either point B, or C. Again, mathematically there are solutions of our systems, but it can be no optimum solution. We will understand it on the next lecture. Another problem is about inconsistent system if there is no set of values for the unknown vector $\vec{x}$ that satisfies all of the equations. Or in mathematical terms, it happens when rank of initial coefficients matrix is less than rank of augmented matrix (a matrix of a kind $[A|b]$). Such systems can be either determined (defined) or underdetermined.
     \subsubsection*{Inconsistent system}
-    \begin{wrapfigure}[12]{r}{0.24\columnwidth}
-        \includegraphics[height=0.3\columnwidth, width=0.24\columnwidth]{lectures/images/inconsistent_system_without_vectors.png}
+    \begin{wrapfigure}[13]{r}{0.25\columnwidth}
+        \includegraphics[height=0.25\columnwidth, width=0.25\columnwidth]{lectures/images/inconsistent_system.png}
         \caption*{\scriptsize{Example of inconsistent system.}}
         \label{fig:inconsistent}
     \end{wrapfigure}
     For example, you have approximately calculated several coefficients of the initial matrix and after the approximate calculations you obtained the system of equations, for example, a kind of: 
-    \[
-        \left\{ \begin{array}{c}
-        x_1 + 2x_2 = 3,\\
-        2x_1 + 4x_2 = 5
-           \end{array}
-        \right. 
-    \]
+    $$
+        \left\{
+            \begin{array}{c}
+                2x-y=0,\\
+                2x-y=1
+            \end{array}.
+        \right.  
+    $$
     It looks like 2 parallel lines. Of course, rarely some $\vec{x}$ exists, but we cannot solve this system because the coefficients are not exact (they contain some random errors, rounding after calculations, etc.). But answers can still be the same. How much do we need to sell? We can choose, for example, solutions A or B or even C, but what would be more optimal or correct. We will give an answer to this question right off the bat in the next lecture. Now let's define some new concepts that will help us with it.
     \subsection*{Pseudoinverse Matrices}
     \begin{definition}{Pseudoinverse}{}
