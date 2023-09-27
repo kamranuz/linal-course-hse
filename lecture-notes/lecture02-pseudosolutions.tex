@@ -1,5 +1,7 @@
 \setcounter{section}{1}
-\section{Pseudosolutions and its applications. Linear regression.}
+\fancyfoot[R]{v1.1}
+
+\section{Pseudosolutions}
 \subsection*{Intuition behind pseudosolutions}
     \par 
     Let's recall that the system of linear equations (SLE) can be represented using the following notation
@@ -94,14 +96,14 @@
                 \begin{array}{c}
                     2x-y=0,\\
                     2x-y=1
-                \end{array}
+                \end{array}.
             \right.  
         $$
         The system does not have solution. Geometrically the system describes two parallel lines. Our intuition hints us to choose a point on a line right in middle of the parallel lines. However, it is still a whole family of solutions that can be the answer to the request of the product or business problem. 
         \newpage
-\subsubsection*{Pseudosolution}
+\subsection*{Pseudosolution}
     \begin{definition}{Pseudosolution}{}
-        Consider a system of a linear equations $A\vec{x} = \vec{b}$. A vector $\vec{u} \in \C^n$ is called a pseudosolution (least square solution), if
+        Consider a system of a linear equations $A\vec{x} = \vec{b}$. A vector $\vec{u} \in \C^n$ is called a pseudosolution (or least square solution), if
         \[
             \left| A\vec{x} - \vec{b} \right| \ge \left| A\vec{u} - \vec{b} \right|,
             \quad
@@ -110,7 +112,7 @@
         That is, vector $f(\vec{x}) =\begin{bmatrix}f_1\\ \vdots\\f_n\end{bmatrix}= A\vec{x}-\vec{b}$ reaches it's minimum length at $\vec{x}=\vec{u}$. That is, $\vec{x}=\vec{u}$ is the solution of the following problem
         $$|f(x)|^2 = |f_1|^2 + \ldots + |f_n|^2 \rightarrow \mathop{min}_{\vec{x}}.$$ 
     \end{definition}
-    \begin{theorema}{$\vec{u} = A^+\vec{b}$}{}
+    \begin{theorema}{$\vec{u} := A^+\vec{b}$}{}
         The vector $\vec{u} = A^+\vec{b}$ is a pseudosolution of the system of linear equations $A\vec{x} = \vec{b}$. Moreover, among all pseudosolutions, the vector $\vec{u}$ is the unique pseudosolution with minimal length.
     \end{theorema}
     \begin{proposition}{}{}
@@ -120,7 +122,7 @@
         $A\hat{x} - \vec{b} = 0 \Longrightarrow \left| A\hat{x} - \vec{b} \right| = 0 = \min |f_x|^2.$
     \end{proof}
     \vspace*{0.2cm}
-    \begin{proposition}{}{}
+    \begin{proposition}{1}{}
         \begin{tabular}{|l|l|}
             \hline
             Type of a system & Solution \\ \hline
@@ -129,7 +131,7 @@
             inconsistent     &    $\hat{x}=A^+\vec{b}$  is the pseudosolution  of minimal length    \\ \hline
         \end{tabular}
     \end{proposition}
-    \begin{lemma}{}{}
+    \begin{lemma}{1}{}
         $\im (AA^+-I) \perp \im (A) $.
     \end{lemma}
     \begin{proof}    
@@ -144,7 +146,7 @@
         which means that by proving (\ref{2}), we get (\ref{1}). Let us prove (\ref{2}).
         \begin{eqnarray}
             &&M^* A=(AA^+-I)^* A
-            =((AA^+)^*-I^*) 
+            =((AA^+)^*-I^*)A 
             =(AA^+)^*A-I^* A
             \stackrel{\text{axiom III}}{=}AA^+A-I
             \stackrel{\text{axiom I}}{=}A-A=0\nonumber.
@@ -191,163 +193,318 @@
         \end{eqnarray}
         which means that $u\perp w$. Using Pythagoras theorem, we get $|\vec{x}|\ge|\vec{u}|$, which means that $\vec{u}$ is pseudosolution with minimal length. By Pythagoras theorem $|\vec{x}|=|\vec{u}|\Leftrightarrow\vec{w}=0\Leftrightarrow \vec{x}=\vec{u}$, which means that $\vec{u}$ is unique.
     \end{proof}
-    \Ex
-    Find pseudosolution of the following inconsistent system
-    \[
-        A = \begin{bmatrix}
-            2 & 1\\
-            2 & 1
-        \end{bmatrix}, \hspace*{0.5cm} \vec{b} = \begin{bmatrix}
-            3 \\ 6
-        \end{bmatrix}  
-    \]
-    
-    Then pseudosolution can be found by the formula
-    \[
-        \hat{x} = A^+\vec{b}.  
-    \]
-    
-    Pseudoinverse matrix to $A$ can be obtained by
-    \begin{gather*}
-        A^+ = \left( \begin{bmatrix}
-            1 \\ 1
-        \end{bmatrix} \cdot \begin{bmatrix}
-            2 & 1
-        \end{bmatrix}\right)^+ = \begin{bmatrix}
-            2 & 1
-        \end{bmatrix}^+ \cdot \begin{bmatrix}
-            1 \\ 1
-        \end{bmatrix}^+ = \dfrac{1}{2}\cdot\dfrac{1}{5} \begin{bmatrix}
-            2 & 2 \\
-            1 & 1
-        \end{bmatrix} = \dfrac{1}{10} \begin{bmatrix}
-            2 & 2 \\
-            1 & 1
-        \end{bmatrix}
-    \end{gather*}
-    
-    Then we can get a pseudosolution
-    \[
-        \hat{x} = \dfrac{1}{10} \begin{bmatrix}
-            2 & 2 \\
-            1 & 1
-        \end{bmatrix} \cdot \begin{bmatrix}
-            3 \\ 
-            6
-        \end{bmatrix} = \dfrac{1}{10} \begin{bmatrix}
-            18 & 9
-        \end{bmatrix}
-    \]
-    \begin{proposition}{}{}
-        $\vec{x}\ $ is a pseudosolution $\Leftrightarrow \vec{x}\ $ is a solution of the "normal" system of a kind
+    \begin{problem}{Finding a pseudosolution}
+        Find a pseudosolution of the following inconsistent system
         \[
+            A = \begin{bmatrix}
+                2 & 1\\
+                2 & 1
+            \end{bmatrix}, \hspace*{0.5cm} \vec{b} = \begin{bmatrix}
+                3 \\ 6
+            \end{bmatrix}.  
+        \]
+        \begin{solution}
+            Then pseudosolution can be found by the formula
+            \[
+                \vec{u} = A^+\vec{b}.  
+            \]
+            Since $\rank(A)=1$, we could apply following formula for pseudoinverse of matrix $A$ 
+            \[
+                A^+ = \dfrac{1}{\sum{a_{ij}^2}} A^* 
+                = \dfrac{1}{1^2+1^2+2^2+2^2} 
+                \begin{bmatrix}
+                    2 & 1 \\
+                    2 & 1
+                \end{bmatrix}^* 
+                = \dfrac{1}{10} 
+                \begin{bmatrix}
+                    2 & 2 \\
+                    1 & 1
+                \end{bmatrix}.
+            \]
+            Finally, we get a pseudosolution of the system
+            \[
+                \vec{u} = \dfrac{1}{10} \begin{bmatrix}
+                    2 & 2 \\
+                    1 & 1
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    3 \\ 
+                    6
+                \end{bmatrix} = \dfrac{1}{10} \begin{bmatrix}
+                    18 & 9
+                \end{bmatrix}.
+            \]
+        \end{solution}
+    \end{problem}
+    
+    \begin{lemma}{2}{} 
+        $$
+            A\vec{x}=\vec{b}
+            \quad
+            \Leftrightarrow
+            \quad
+            A\vec{x}=AA^+\vec{b}.
+        $$
+    \end{lemma}
+    \begin{proposition}{}{}
+        $\vec{x}$ is a pseudosolution
+        $\Leftrightarrow
+        \vec{x}$ is a solution of the ''normal system'', which means
+        \[  
+            A\vec{x}=\vec{b}
+            \quad
+            \Leftrightarrow
+            \quad
             A^*A\vec{x} = A^*\vec{b}.  
         \]
     \end{proposition}
+    \begin{proof}
+        Let $\vec{x}$ be a pseudosolution of the system $A\vec{x}=\vec{b}$. Let us prove that pseudosolution $\vec{x}$  is also a solution the normal system $A^*A\vec{x} = A^*\vec{b}$
+        \begin{eqnarray}    
+            A^*A\vec{x}
+            &\stackrel{\text{Lemma 2}}{=}&A^*AA^+\vec{b}\nonumber\\
+            &\stackrel{\text{axiom III}}{=}&A^*(AA^+)^*\vec{b}
+            =(AA^+A)^*\vec{b}\nonumber\\
+            &\stackrel{\text{axiom I}}{=}&A^*\vec{b}.\nonumber
+        \end{eqnarray}
+        
+         Let $\vec{x}$ be a solution of normal system $A^*A\vec{x}=A^*\vec{b}$. Let us prove that solution of normal system $\vec{x}$  is also a pseudosolution of the system $A\vec{x}=\vec{b}$
+        \begin{eqnarray}
+            A\vec{x}
+            &\stackrel{\text{axiom I}}{=}&AA^+A\vec{x}\nonumber\\  
+            &\stackrel{\text{axiom III}}{=}&(AA^+)^*A\vec{b}=A^{+^*}A^*A\vec{x}\nonumber\\      
+            &\stackrel{\text{normal system}}{=}&A^{+^*}A^*\vec{b}=(AA^+)^+\vec{b}\nonumber\\
+            &\stackrel{\text{axiom III}}{=}&AA^+\vec{b}.\nonumber
+        \end{eqnarray}
+    \end{proof}
     
     \begin{proposition}{}{}
         All pseudosolutions of $A\vec{x} = \vec{b}$ are given by the formula
-        \[
-            \vec{x} = A^+\vec{b} - (A^+A-I)\vec{y},  
-        \]
-        where $\vec{y} \in \C^n$ -- an arbitrary vector.
+        \begin{eqnarray}
+            \vec{x} = A^+\vec{b} - (A^+A-I)\vec{y},\label{4}
+        \end{eqnarray}
+        where $\vec{y} \in \C^n$ is an arbitrary vector.
     \end{proposition}
+    \begin{proof}
+        First, let us check that (\ref{4}) is indeed a pseudosolution. 
+        \[
+            A\vec{x}
+            \stackrel{(\ref{4})}{=}AA^+\vec{b}+\underbrace{(AA^+A-A)}_{0}\vec{y}
+            \stackrel{\text{axiom I}}{=}AA^+\vec{b},
+        \]
+        which by Lemma 2 is pseudosolution.
+
+        Now, let us prove that all pseudosolutions are in the form (\ref{4}). Let $\vec{x}$ be a pseudosolutions. If we set $\vec{y}=\vec{x}$ in (\ref{4}), we get
+        \begin{eqnarray}
+             \vec{x}&=&A^+\vec{b} - (A^+A-I)\vec{y}\nonumber\\
+             &=&A^+\vec{b} - (A^+A-I)\vec{x}\nonumber\\
+             &=&A^+\vec{b} -A^+A\vec{x}+\vec{x}\nonumber\\
+             &\stackrel{\text{Lemma 2}}{=}&A^+\vec{b} -A^+AA^+\vec{b}+\vec{x}\nonumber\\
+             &=&\underbrace{(A^+ -A^+AA^+)}_{0}\vec{b}+\vec{x}\nonumber\\
+            &\stackrel{\text{axiom II}}{=}&\vec{x}.\nonumber
+        \end{eqnarray}
+    \end{proof}
     
-    \Ex
-    Find all pseudosolutions of the system from previous example. 
-    
-    We have already obtained one pseudosolution
-    \[
-        \hat{x} = \dfrac{1}{10}\begin{bmatrix}
-            18\\
-            9
-        \end{bmatrix}.  
-    \]
-    
-    Now we need to obtain $A^+A-I$
-    \[
-        A^+A-I = \dfrac{1}{10} \begin{bmatrix}
-            2 & 2 \\
-            1 & 1
-        \end{bmatrix} \cdot \begin{bmatrix}
-            2 & 1\\
-            2 & 1
-        \end{bmatrix} - \begin{bmatrix}
-            1 & 0\\
-            0 & 1
-        \end{bmatrix} = \dfrac{1}{10}\begin{bmatrix}
-            8 & 4 \\
-            4 & 2
-        \end{bmatrix} - \begin{bmatrix}
-            1 & 0 \\
-            0 & 1
-        \end{bmatrix} = \begin{bmatrix}
-            -0.2 & 0.4 \\
-            0.4 & -0.8
-        \end{bmatrix}.
-    \]
-    
-    Finally, all pseudosolutions are given by the formula
-    \[
-        \vec{x} = \dfrac{1}{10}\begin{bmatrix}
-            18 \\ 9
-        \end{bmatrix} - \begin{bmatrix}
-            -0.2 & 0.4\\
-            0.4 & -0.8
-        \end{bmatrix}  \begin{bmatrix}
-            y_1 \\
-            y_2
-        \end{bmatrix} = \begin{bmatrix}
-            1.8 + 0.2y_1 - 0.4 y_2\\
-            0.9 - 0.4y_1 + 0.8y_2
-        \end{bmatrix}.
-    \]
-    % \subsection*{Linear regression problem}
-    
-    
-    % \begin{wrapfigure}{l}{1\columnwidth}
-    %     \scalebox{1.5}{\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
-    %         %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+    \begin{problem}{Finding all pseudosolutions}  
+        Find all pseudosolutions of the system from problem 1.
+        \begin{solution}
+            We have already obtained one pseudosolution
+            \[
+                \vec{u} = \dfrac{1}{10}\begin{bmatrix}
+                    18\\
+                    9
+                \end{bmatrix}.  
+            \]
             
-    %         %Straight Lines [id:da021044538065793983] 
-    %         \draw    (100.4,150.71) -- (100.4,42.71) ;
-    %         \draw [shift={(100.4,39.71)}, rotate = 90] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (5.36,-2.57) -- (0,0) -- (5.36,2.57) -- (3.56,0) -- cycle    ;
-    %         %Straight Lines [id:da768552366016573] 
-    %         \draw    (89.73,140.05) -- (216.73,140.05) ;
-    %         \draw [shift={(219.73,140.05)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (5.36,-2.57) -- (0,0) -- (5.36,2.57) -- (3.56,0) -- cycle    ;
-    %         %Shape: Circle [id:dp4077752415315412] 
-    %         \draw   (111.06,106.53) .. controls (111.06,104.62) and (112.62,103.06) .. (114.53,103.06) .. controls (116.45,103.06) and (118,104.62) .. (118,106.53) .. controls (118,108.45) and (116.45,110) .. (114.53,110) .. controls (112.62,110) and (111.06,108.45) .. (111.06,106.53) -- cycle ;
-    %         %Shape: Circle [id:dp2037573912425814] 
-    %         \draw   (123.99,131.49) .. controls (123.99,129.57) and (125.55,128.02) .. (127.46,128.02) .. controls (129.38,128.02) and (130.93,129.57) .. (130.93,131.49) .. controls (130.93,133.4) and (129.38,134.96) .. (127.46,134.96) .. controls (125.55,134.96) and (123.99,133.4) .. (123.99,131.49) -- cycle ;
-    %         %Shape: Circle [id:dp45400412163463866] 
-    %         \draw   (162.13,73.2) .. controls (162.13,71.28) and (163.68,69.73) .. (165.6,69.73) .. controls (167.51,69.73) and (169.07,71.28) .. (169.07,73.2) .. controls (169.07,75.11) and (167.51,76.67) .. (165.6,76.67) .. controls (163.68,76.67) and (162.13,75.11) .. (162.13,73.2) -- cycle ;
-    %         %Shape: Circle [id:dp5342492536064438] 
-    %         \draw   (131.06,76.53) .. controls (131.06,74.62) and (132.62,73.06) .. (134.53,73.06) .. controls (136.45,73.06) and (138,74.62) .. (138,76.53) .. controls (138,78.45) and (136.45,80) .. (134.53,80) .. controls (132.62,80) and (131.06,78.45) .. (131.06,76.53) -- cycle ;
-    %         %Shape: Circle [id:dp2972731544634346] 
-    %         \draw   (152.4,113.2) .. controls (152.4,111.28) and (153.95,109.73) .. (155.87,109.73) .. controls (157.78,109.73) and (159.33,111.28) .. (159.33,113.2) .. controls (159.33,115.11) and (157.78,116.67) .. (155.87,116.67) .. controls (153.95,116.67) and (152.4,115.11) .. (152.4,113.2) -- cycle ;
-    %         %Straight Lines [id:da2595807846962981] 
-    %         \draw    (101.06,140.05) -- (186.4,51.6) ;
-    %         %Shape: Circle [id:dp7278044041658378] 
-    %         \draw   (183.73,70.4) .. controls (183.73,68.48) and (185.28,66.93) .. (187.2,66.93) .. controls (189.11,66.93) and (190.67,68.48) .. (190.67,70.4) .. controls (190.67,72.31) and (189.11,73.87) .. (187.2,73.87) .. controls (185.28,73.87) and (183.73,72.31) .. (183.73,70.4) -- cycle ;
-    %         %Straight Lines [id:da4346572573275653] 
-    %         \draw    (117.75,109.16) -- (123.75,115.16) ;
-    %         \draw [shift={(123.75,115.16)}, rotate = 225] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         \draw [shift={(117.75,109.16)}, rotate = 225] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         %Straight Lines [id:da18387194843836618] 
-    %         \draw    (124.32,128.59) -- (118.84,122.78) ;
-    %         \draw [shift={(118.84,122.78)}, rotate = 46.7] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         \draw [shift={(124.32,128.59)}, rotate = 46.7] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         %Straight Lines [id:da2364994210811795] 
-    %         \draw    (137.76,79.01) -- (148.9,89.87) ;
-    %         \draw [shift={(148.9,89.87)}, rotate = 224.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         \draw [shift={(137.76,79.01)}, rotate = 224.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         %Straight Lines [id:da8931600019469914] 
-    %         \draw    (141.51,98.78) -- (152.9,110.73) ;
-    %         \draw [shift={(152.9,110.73)}, rotate = 226.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         \draw [shift={(141.51,98.78)}, rotate = 226.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         %Straight Lines [id:da2901806653749395] 
-    %         \draw    (177.33,62.2) -- (184.19,68.49) ;
-    %         \draw [shift={(184.19,68.49)}, rotate = 222.51] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         \draw [shift={(177.33,62.2)}, rotate = 222.51] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (0,3.91) -- (0,-3.91)   ;
-    %         \end{tikzpicture}}
-    % \end{wrapfigure} 
+            Now we need to obtain $A^+A-I$
+            \[
+                A^+A-I = \dfrac{1}{10} \begin{bmatrix}
+                    2 & 2 \\
+                    1 & 1
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    2 & 1\\
+                    2 & 1
+                \end{bmatrix} - \begin{bmatrix}
+                    1 & 0\\
+                    0 & 1
+                \end{bmatrix} = \dfrac{1}{10}\begin{bmatrix}
+                    8 & 4 \\
+                    4 & 2
+                \end{bmatrix} - \begin{bmatrix}
+                    1 & 0 \\
+                    0 & 1
+                \end{bmatrix} = \begin{bmatrix}
+                    -0.2 & 0.4 \\
+                    0.4 & -0.8
+                \end{bmatrix}.
+            \]
+            
+            Finally, all pseudosolutions are given by the formula (\ref{4})
+            \[
+                \vec{x} = \dfrac{1}{10}\begin{bmatrix}
+                    18 \\ 9
+                \end{bmatrix} - \begin{bmatrix}
+                    -0.2 & 0.4\\
+                    0.4 & -0.8
+                \end{bmatrix}  \begin{bmatrix}
+                    y_1 \\
+                    y_2
+                \end{bmatrix} = \begin{bmatrix}
+                    1.8 + 0.2y_1 - 0.4 y_2\\
+                    0.9 - 0.4y_1 + 0.8y_2
+                \end{bmatrix}.
+            \] 
+        \end{solution}
+    \end{problem}
+    \newpage
+    \subsection*{Linear regression problem}
+
+        \begin{wrapfigure}[18]{r}{0.33\columnwidth}
+            \includegraphics[width=0.33\columnwidth]{lectures/images/linear_regression.png}
+            \caption*{\scriptsize{In linear regression, the observations (red) are assumed to be the result of random deviations (blue) from an underlying relationship (black) between a dependent variable (y) and an independent variable (x).}}
+            \label{fig:inconsistent_with_vectors}
+        \end{wrapfigure}  
+        
+        Let $y,x_1,x_2,\ldots,x_n$ be variables. We believe that  dependent variable $y$ could be approximated by linear combination of independent variables $x_1,x_2,\ldots,x_n$. That is,
+        $$
+           y\approx  a_1x_1+a_2x_2+\cdots +a_nx_n .
+        $$
+        The problem is to find coefficients $a_1,a_2,\ldots,a_n$. In order to find them we conduct $m$ experiments (samples) and get following dataset of observations
+        $$
+        \begin{cases}
+            y_1\approx a_1x_{11}+\ldots+a_nx_{n1} \nonumber\\    
+            y_2\approx a_2x_{12}+\ldots+a_nx_{n2} \nonumber\\    ~~~~~~~~~~~~~~~~~~\vdots~~~~~~~~~~~~~~~~~\nonumber\\
+            y_m\approx a_1x_{1m}+\ldots+a_nx_{nm} \nonumber
+        \end{cases}
+        $$ 
+        where $x_{1i},x_{2i},\ldots,x_{ni},y_i$ is a result of $i$-th experiment. Clearly, the problem could is equivalent to matrix equation of the form   
+        \begin{eqnarray}
+            X\vec{a}\approx\vec{y},\nonumber
+        \end{eqnarray}
+        where 
+        $$
+            X=
+            \begin{bmatrix}
+                x_{11} & \cdots & x_{1n}\\
+                \vdots & \ddots & \vdots\\
+                x_{m1} & \cdots & x_{nm} 
+            \end{bmatrix},
+            \quad
+            \vec{a}=
+            \begin{bmatrix}
+                a_{1}\\
+                \vdots\\
+                a_{n}\\
+            \end{bmatrix},\quad
+            \vec{y}=
+            \begin{bmatrix}
+                y_{1}\\
+                \vdots\\
+                y_{m}\\
+            \end{bmatrix}.\quad
+        $$
+        The solution of the problem is least square solution (pseudosolution)
+        $$
+        \vec{a}=X^+\vec{y}.
+        $$
+
+        \begin{problem}{Linear regression}
+            Find linear approximation of temperature using following dataset of temperature observations. Find temperature on day $4$.
+            \begin{center}
+            \begin{tabular}{ |c|c|c| } 
+             \hline
+             $\#$ & Day & Temperature \\\hline
+             1& 1 & 19\textdegree \\ 
+             2& 2 & 18\textdegree \\ 
+             3& 2 & 20\textdegree \\ 
+             4& 3 & 15\textdegree \\ 
+             \hline
+            \end{tabular}
+            \end{center}
+            \begin{solution}
+                Let us denote day and temperature of the row $i$ by $x_i$ and $y_i$ respectively. We assume that temperature ($y(x)$) could be approximated by linear model 
+                $$
+                y(x)=ax+b\in\mathbb{R},
+                $$
+                where $x\in\mathbb{R}$ is number of the day and $a,b\in\mathbb{R}$ are unknown coefficients. This means that we need to find pseudosolution of the following system
+                $$
+                    X\vec{a}=\vec{y},
+                $$
+                where
+                $$
+                    X=
+                    \begin{bmatrix}
+                        1 & 1 \\
+                        2 & 1 \\
+                        2 & 1 \\
+                        3 & 1 
+                    \end{bmatrix},\quad
+                    \vec{y}=
+                    \begin{bmatrix}
+                        19\\
+                        18\\
+                        20\\
+                        15
+                    \end{bmatrix},\quad
+                    \vec{a}=
+                    \begin{bmatrix}
+                        a\\
+                        b
+                    \end{bmatrix}.
+                $$
+                So we need to evaluate the following $\vec{a}=X^+\vec{y}$. Since $X$ is full column rank, we get 
+                \begin{eqnarray}
+                    X^+&=&(X^*X)^{-1}X^*
+                    =\left(2
+                    \begin{bmatrix}
+                        9 & 4\\
+                        4 & 2
+                    \end{bmatrix}
+                    \right)^{-1}
+                    X^*\nonumber\\
+                    &=&
+                    \dfrac{1}{2}
+                    \dfrac{1}{2}
+                    \begin{bmatrix}
+                        2 & -4\\
+                        -4 & 9
+                    \end{bmatrix}
+                    \begin{bmatrix}
+                        1 & 2 & 2 & 3\\
+                        1 & 1 & 1 & 1
+                    \end{bmatrix}\nonumber\\
+                    &=&
+                    \dfrac{1}{4}
+                    \begin{bmatrix}
+                        -2 & 0 & 0 & 2\\
+                        5 & 1 & 1 & -3
+                    \end{bmatrix}\nonumber
+                \end{eqnarray}
+                Hence, we get
+                $$
+                    \vec{a}=
+                    X^+\vec{y}=
+                    \dfrac{1}{4}
+                    \begin{bmatrix}
+                        -2 & 0 & 0 & 2\\
+                        5 & 1 & 1 & -3
+                    \end{bmatrix} 
+                    \begin{bmatrix}
+                        19\\
+                        18\\
+                        20\\
+                        15
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        -2\\
+                        22
+                    \end{bmatrix}.
+                $$
+                This means that linear model $y(x)$ is 
+                $$
+                    y(x)=-2x+22.
+                $$
+                According to linear model $y(x)$, on day 4 temperature will be $y(4)=14$\textdegree.
+            \end{solution}
+        \end{problem}
