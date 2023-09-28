@@ -1,0 +1,430 @@
+\setcounter{section}{2}
+\section{Matrix decompositions and its applications}
+\par 
+We have already discussed the skeleton decomposition, slightly talked about the Singular Value Decomposition and Spectral decomposition. Now we should investigate some others useful decompositions and give the concrete examples of SVD since it is the most important method to data science and linear algebra that can solve a set of problems, e.g. dimension reduction and low-rank approximations. Let us begin with the LU decomposition.
+
+\subsection*{LU decomposition}
+Lower-Upper (LU) decomposition or factorization factors a matrix as the product of a lower triangular matrix and an upper triangular matrix. 
+\par
+Suppose $A = M_{n \times n}(F)$ is a square matrix. For simplicity, let's talk about the homogeneity system of linear equations $A\vec{x} = \vec{0}$. We can use the classical approach such as Gaussian elimination to obtain the Row Echelon Form of the matrix $A$:
+
+\[
+        \left[
+            \begin{array}{ccc}
+                a_{11} & \ldots & a_{1n} \\
+                \vdots & \ddots & \vdots \\
+                a_{n1} & \ldots & a_{nn}
+            \end{array}
+        \right] \scalebox{1.5}{$\overset{\text{Gaussian}}{ \underset{\text{elimination}}{\xymatrix@C=3em{{}\ar@{~>}[r]&{}}}}$} \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+            \matrix (A) [matrix of nodes, left delimiter=[,right delimiter={]}]{
+            \neq 0 \\
+             &\neq 0\hspace*{3mm}\\
+             & &\neq 0 \\
+             & & &\neq 0\hspace*{6mm}\\
+             & & & &\neq 0\\};
+             \foreach \i [remember=\i as \j (initially 1)] in {2,...,5}
+            \draw[line width=1.5] (A-\j-\j.south west) -|(A-\i-\i.south west);
+            \draw[line width=1.5] (A-5-5.south west)--(A-5-5.south east);
+        
+            \node[circle,draw,rotate=45,scale=1.5,yscale=3,xscale=1.5,line width=4] (c) at (-1.25,-0.75){}; 
+            \node[anchor=north east] at ([shift={(-0.5cm,-0.25cm)}]A.north east) {\scalebox{7}{*}};
+        \end{tikzpicture}
+\]
+Matrix obtained with Gaussian elimination is the upper-triangular one. The steps of Gaussian elimination process are quite simple. Suppose the element of the matrix $A$ $a_{11} \neq 0$. Than we need to subtract from other rows the chosen one (in our case it is the row $A_1$ with element $a_{11}$) multiplied with some number:
+\[
+        A_n \hookrightarrow A_n - \lambda A_1,
+\]
+where $\lambda = \dfrac{a_{n1}}{a_{11}}$. After that we need to perform approximately $n^2$ operations to obtain the desired upper triangular matrix. In fact, when we apply such operations we perform matrix multiplication:
+\[
+        A \hookrightarrow A' = T \cdot A = \underbrace{T \cdot I}_{T} \cdot A',
+\]
+where the matrix $T = \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+    \matrix (A) [matrix of nodes, left delimiter=[,right delimiter={]}]{
+        1 & \hspace*{3mm} \\
+        &  1 & \hspace*{3mm} \\
+        &      & $\ddots$ & \hspace*{3mm} \\
+        &      &  & 1 \\};
+
+    \node[circle,draw,rotate=45,scale=1,yscale=2,xscale=1.5,line width=1] (c) at (-4mm,-4mm){};
+    \node[circle,draw,scale=1,yscale=2,xscale=1.5,line width=1] (c) at (5mm,5mm){};
+
+    \node[anchor=south west] at ([shift={(-1mm,0.5mm)}]A.south west) {$-\lambda$};
+\end{tikzpicture} = L_1
+$ which is lower triangular matrix with $1$'s on the diagonal. So the complete pipeline:
+\[
+    \begin{array}{c}
+        A \longrightarrow U = L_1L_2 \cdot L_k \cdot A , \\
+        A = (L_1 \ldots L_k)^{-1} U = LU ,       
+    \end{array}
+\]
+where, again, $L$ is a lower triangular matrix and $U$ is upper triangular one.
+\par
+But actually it is not a general case. On the very first step we have assumed that the element $a_{11}$ of the row $A_1$ is non-zero element and repeated it for each further step. But it can be equal to zero and the same steps wont be enough. In such cases we need to permute the rows to make the decomposition. Permuting is equivalent to multiplying on the matrix of permutation. Hence, for general matrices the decomposition can be written in the following way:
+\[
+    A = PLU,  
+\]
+where the matrix $P$ is the permutation matrix (permutation of rows of identity matrix $I$), e.g.:
+\[
+    \begin{bmatrix}
+        1 & 0 & 0 & \ldots & \ldots & 0\\
+        0 &  0 & 1 & \ldots & \ldots & 0\\
+        0 & 1 & \ldots & \ldots & \ldots & 0\\
+        0 & \ldots & \ldots & 1 &\ldots & 0
+    \end{bmatrix}
+\]
+
+\begin{note}{Useful properties of LU decomposition}{}
+    \begin{itemize}
+        \item The determinant of the decomposed matrix $A$ can be computed from finding the product of the diagonal elements of both the $L$ and $U$ matrices from the $LU$ decomposition;
+        \[
+            \det A = \det L \det U = \left(\prod\limits_{i=1}^n l_{ii}\right)\left(\prod\limits_{i=1}^n u_{ii}\right)
+        \]  
+        \item The knowledge of the $LU$ decomposition of matrix $A$ allows us to solve the system of linear equations $A\vec{x} = \vec{b}$.
+        \par
+        The steps to solve the system of linear equations using $LU$ decomposition:
+        
+        \begin{enumerate}
+            \item Find the $LU$ decomposition:
+            \[
+                A = LU =   \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+                    \matrix (A) [matrix of nodes, left delimiter=[,right delimiter={]}]{
+                    \neq 0 \\
+                     &\neq 0\hspace*{3mm}\\
+                     & &\neq 0 \\
+                     & & &\neq 0\hspace*{6mm}\\};
+                     \foreach \i [remember=\i as \j (initially 1)] in {2,...,4}
+                    \draw[line width=1.5] (A-\j-\j.south west) -|(A-\i-\i.south west);
+                    \draw[line width=1.5] (A-4-4.south west)--(A-4-4.south east);
+                
+                    \node[circle,draw,rotate=60,scale=1.5,yscale=2.5,xscale=1.5,line width=2] (c) at (0.75,0.5){}; 
+                    \node[anchor=south west] at ([shift={(.25cm,-0.75cm)}]A.south west) {\scalebox{5}{*}};
+                    \node[anchor=south] at ([shift={(0.cm,-0.75cm)}]A.south) {\Large L};
+                \end{tikzpicture}  \begin{tikzpicture}[baseline={([yshift=-.5ex]current bounding box.center)}]
+                    \matrix (A) [matrix of nodes, left delimiter=[,right delimiter={]}]{
+                    \neq 0 \\
+                     &\neq 0\hspace*{3mm}\\
+                     & &\neq 0 \\
+                     & & &\neq 0\hspace*{6mm}\\};
+                     \foreach \i [remember=\i as \j (initially 1)] in {2,...,4}
+                    \draw[line width=1.5] (A-\j-\j.south west) -|(A-\i-\i.south west);
+                    \draw[line width=1.5] (A-4-4.south west)--(A-4-4.south east);
+                
+                    \node[circle,draw,rotate=60,scale=1.5,yscale=2.5,xscale=1.5,line width=2] (c) at (-1.25,-0.75){}; 
+                    \node[anchor=north east] at ([shift={(-0.5cm,-0.25cm)}]A.north east) {\scalebox{5}{*}};
+                    \node[anchor=south] at ([shift={(0.cm,-0.75cm)}]A.south) {\Large U};
+                \end{tikzpicture} 
+            \]
+            \item We can write the initial system using the decomposition $LUx = b$ or $L(Ux) = b$. Then we can write the system:
+            \[
+                \left\{
+                    \begin{array}{c}
+                        Ly = b, \\
+                        Ux = y
+                    \end{array} 
+                \right.  
+            \]
+            \item We can immediately find $y_1, \ldots, y_n$:
+            \[
+                \left\{
+                    \begin{array}{lr}
+                        l_{11} y_1 = b_1 & \xymatrix@C=3em{{}\ar@{~>}[r]&{}} \text{ find } y_1\\
+                        l_{21}y_1 + l_{22} y_2 = b_2 & \xymatrix@C=3em{{}\ar@{~>}[r]&{}} \text{ find } y_2\\
+                        \vdots & \vdots \hspace*{1.5cm}\\
+                        l_{n1} y_1 + l_{n2}y_2+ \ldots + l_{nn}y_n = b_n  & \xymatrix@C=3em{{}\ar@{~>}[r]&{}} \text{ find } y_n
+                    \end{array}
+                \right.
+            \]
+            \item We can find the elements of matrices $L$ and $U$ in a fast way:
+            \[
+                A = \begin{bmatrix}
+                    a_{11} & a_{12} & \ldots & a_{1n}\\
+                    a_{21} & a_{22} & \ldots & a_{2n}\\
+                    \vdots & \ddots & \ddots & \vdots\\
+                    a_{n1} & a_{12} & \ldots & a_{nn}\\
+
+                    \end{bmatrix}  = \begin{tikzpicture}[baseline={([yshift=1.5ex]current bounding box.center)}]
+                    \matrix (A) [matrix of nodes, left delimiter=[,right delimiter={]}]{
+                    1 \hspace*{2mm}& \\
+                    $l_{21}$ & 1 &\hspace*{0.3mm}\\
+                    $l_{31}$ & $l_{32}$ & \hspace*{0.6mm} &\hspace*{0.3mm}\\
+                    &&\hspace*{0.3mm}&\hspace*{0.6mm} &&\\};
+                    \draw[line width=1.5] (A-1-1.south)--(A-1-1.north);
+
+                    \draw[line width=1.5] (A-2-1.north)--(A-2-2.north east);
+                    \draw[line width=1.5] (A-2-2.north east)--(A-2-2.south east);
+                    \draw[line width=1.5] (A-2-2.south east)--(A-2-3.south);
+                    \draw[line width=1.5] (A-2-3.south)--(A-3-3.south);
+                    \draw[line width=1.5] (A-3-3.south)--(A-3-4.south);
+                    \draw[line width=1.5] (A-3-4.south)--(A-4-4.south);
+                    \draw[line width=1.5] (A-4-4.south)--(A-4-4.south east);
+
+                    \node[circle,draw,rotate=45,scale=1,yscale=2.5,xscale=1.5,line width=2] (c) at (0.85,0.5){};
+                    \node[anchor=south] at ([shift={(0.cm,-0.75cm)}]A.south) {\Large L};
+                \end{tikzpicture}  U   
+            \]
+            Hence, we have:
+            \[
+                \begin{array}{lr}
+                    a_{11} = u_{11}& \\
+                    a_{12} = u_{12}& \\
+                    a_{13} = u_{13}& \\
+                    a_{21} = l_{21} \cdot u_{11} & \xymatrix@C=3em{{}\ar@{~>}[r]&{}} l_{21} \\
+                    a_{22} = l_{21} \cdot u_{12} + u_{22} & \xymatrix@C=3em{{}\ar@{~>}[r]&{}} u_{22} \\
+                \end{array}  
+            \]
+        \end{enumerate}
+    \end{itemize}
+\end{note}
+\Ex Find the $LU$ decomposition of the matrix:
+\[
+    A = \begin{bmatrix}
+        2 & 3\\
+        -1 & -2
+    \end{bmatrix}    
+\]
+Let's find the elements of matrices $L$ and $U$:
+\[
+    \begin{bmatrix}
+        2 & 3\\
+        -1 & -2
+    \end{bmatrix} = \begin{bmatrix}
+        1 & 0\\
+        l_{21} & 1
+    \end{bmatrix}  \begin{bmatrix}
+        u_{11} & u_{12}\\
+        0 & u_{22}
+    \end{bmatrix} 
+\]
+Hence, the elements $u_{11} = 2, \ u_{12} = 3$. Then
+\[
+    \begin{array}{lr}
+        -1 = l_{21} \cdot u_{11} = 2l_{21} & \Longrightarrow l_{21} = -\dfrac{1}{2} \\[0.5cm]
+        -2 = l_{21} \cdot u_{12} + u_{22} = -\dfrac{3}{2} + u_{22} & \Longrightarrow u_{22} = -\dfrac{1}{2}
+        
+    \end{array}
+\]
+\newpage
+\subsection*{Cholesky Decomposition}
+Probably, the most useful case for $LU$ decomposition is the decomposition for symmetric positive-definite matrices ($a_{ij} = a_{ji}$ and all eigenvalues are non-negative $\lambda_i \geq 0$). Suppose, $A$ is a symmetric (or Hermitian if $A$ is complex) positive-definite matrix, we can arrange matters so that $U$ is the conjugate transpose of $L$.
+
+\begin{note}{}{}
+    \begin{itemize}
+        \item The symmetric matrix: $a_{ij} = a_{ji} \forall i\neq j$;
+        \item The positive definite:
+        \par 
+        All eigenvalues of matrix are greater than zero:
+        \[
+            \forall i: \ \lambda_i(A) \geq 0    
+        \]
+        or
+        \[
+            \forall \vec{x}:\ \vec{x}^\intercal A \vec{x} \geq 0  
+        \]
+    \end{itemize}
+\end{note}
+
+The Cholesky decomposition of a Hermitian positive-definite matrix $A$ is a decomposition of the form:
+\[
+    A = LL^*  
+\]
+where $L$ is a lower triangular matrix with real and positive diagonal entries $l_{ii} \geq 0$, and $L*$ its conjugate transpose. A closely related variant of this decomposition is the LDL decomposition:
+\[
+    A = LDL^*  
+\]
+where $L$ is a lower unit triangular (unitriangular) matrix, and $D$ is a diagonal matrix:
+\[
+    D = \begin{bmatrix}
+        d_{11} & 0 & \dots & 0 \\
+        0 & d_{22} & \dots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \dots & d_{nn} 
+        \end{bmatrix}  , \ \forall i \in \{1, \ldots, n\} \ d_{ii} \geq 0.
+\]
+The way to find such decomposition is similar to LU one:
+\[
+        A = \begin{bmatrix}
+            a_{11} & a_{12} & \ldots & a_{1n} \\
+            a_{21} & a_{22} & \ldots & a_{2n} \\
+            \vdots & \ddots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \ldots & a_{nn} \\
+        \end{bmatrix} = \begin{bmatrix}
+            l_{11} & 0 & \ldots & \ldots & 0\\
+            l_{21} & l_{22} & 0 & \ldots & 0 \\
+            \vdots & \ddots & \ddots & \ddots & \vdots\\
+            l_{n1} & l_{n2} & \ldots & \ldots & l_{nn} \\
+        \end{bmatrix} \begin{bmatrix}
+            l_{11} & l_{21} & \ldots & l_{n1}\\
+            0 & l_{22} & \ldots & l_{n2} \\
+            \vdots & \ddots & \ddots & \ddots\\
+            \vdots & \ldots & \ldots & \ldots\\
+        \end{bmatrix}
+\]
+So the steps are:
+\[
+        \begin{array}{ll}
+            l_{11}^2 = a_11 & \xymatrix@C=3em{{}\ar@{~>}[r]&{}} l_{11} = \sqrt{a_{11}}\\
+            l_{11} \cdot l_{21} = a_{12} & \xymatrix@C=3em{{}\ar@{~>}[r]&{}} l_{21}\\
+            l_{21}\cdot l_{11} = a_{21} & \\
+            \ldots & \ldots
+        \end{array}
+\]
+If the system of linear equations have the solution then the system is equivalent to solving the normal system:
+\[
+        Ax = b \Longleftrightarrow A^*A x = A^* b,
+\]
+where $N = A^* A$ is symmetric non-negative definite.
+\subsection*{Spectral Decomposition}
+Suppose $A$ is symmetric matrix $A = A^\intercal$ (or at least normal), then there is a diagonal matrix:
+\[
+        \Lambda = \begin{bmatrix}
+            \lambda_1 & 0 & \ldots & 0\\
+            \vdots & \ddots &\ddots & \vdots\\
+            \vdots & \ddots &\ddots & \vdots\\
+            0 & \ldots & \ldots & \lambda_n
+        \end{bmatrix}, \ \lambda_i - \text{ eigenvalues of A},
+\]
+and unitary matrix:
+\[
+    \begin{array}{c}
+        U = \begin{bmatrix}
+            | & | & \ & | \\
+            u^{1} & u^{2} & \dots & u^{n} \\
+            | & | & \ & |
+        \end{bmatrix}    \\[0.5cm]
+        U^\intercal = U^{-1}, \hspace*{3mm} |U^i| = 1, \hspace*{3mm} U^i \perp U^I    
+    \end{array}
+\]
+where $u^i$ is an eigenvector for with corresponding eigenvalue $\lambda = \lambda_i$. Then we can decompose the matrix $A$:
+\[
+    \begin{array}{c}
+        A = U \Lambda U^{-1}\\
+        A = U \Lambda U^\intercal
+    \end{array}  
+\]
+It is very easy to find the solutions of system of linear equations using this decomposition:
+\[
+    \begin{array}{c}
+        A\vec{x} = \vec{b} \rightarrow U\Lambda U^\intercal \vec{x} = \vec{b} \Longrightarrow \\
+        \Rightarrow U^\intercal \vec{x} = \Lambda^{-1} U^\intercal \vec{b}, \\[0.5cm]
+        \Lambda^{-1} = \begin{bmatrix}
+            \lambda_1^{-1} & 0 & \ldots & 0\\
+            \vdots & \ddots &\ddots & \vdots\\
+            \vdots & \ddots &\ddots & \vdots\\
+            0 & \ldots & \ldots & \lambda_n^{-1}
+        \end{bmatrix}
+    \end{array}
+\]
+Hence, the solution:
+\[
+    \vec{x} = U\Lambda^{-1} U^\intercal \vec{b}  
+\]
+\newpage
+\subsection*{Singular Value Decomposition}
+For the arbitrary matrices and even non-square ones we can find the Singular Value Decomposition. Firstly, let's talk about the singular values. To find the singular values we need to find the eigenvalues of normal matrix $A^\intercal A$.
+\[
+      A \xymatrix@C=3em{{}\ar@{~>}[r]&{}} A^\intercal A \xymatrix@C=3em{{}\ar@{~>}[r]&{}} \lambda_i(A^\intercal A) \geq 0,
+\]
+where $i=1, \ldots, n$.  The singular values of matrix $A$ then:
+\[
+    \begin{array}{c}
+        \sigma_1 = \sqrt{\lambda_1(A^*A)}, \\
+        \vdots \\
+        \sigma_n = \sqrt{\lambda_n(A^*A)}
+    \end{array}, \hspace*{0.5cm} \sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_n \geq 0
+\]
+If matrix is symmetric $A = A^\intercal$:
+\[
+    \sigma_i = \sqrt{\lambda_i(A)^2} = |\lambda_i (A)|  
+\]
+If the matrix is also positive definite $\forall i \ \lambda_i(A) \geq 0$, then $\sigma_i = \lambda_i$.
+We can form from the obtained singular values the diagonal matrix of $\Sigma$:
+\[
+    \Sigma = \begin{bmatrix}
+        \sigma_{1} & 0 & \dots & 0 \\
+        0 & \sigma_{2} & \dots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \dots & \sigma_{n} \\
+        0 & 0 & \ldots & 0 \\
+    \end{bmatrix}
+\]
+The singular value decomposition:
+\[
+    A = 
+    \underset{m \times n}{
+        \begin{bmatrix}
+            a_{11} & a_{12} & \dots & a_{1m} \\
+            a_{21} & a_{22} & \dots & a_{2m} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \dots & a_{nm}
+        \end{bmatrix}
+    }
+    = U\Sigma V^\text{T} = 
+    \underset{m \times m}{
+        \begin{bmatrix}
+            | & | & \ & | \\
+            u_{1} & u_{2} & \dots & u_{m} \\
+            | & | & \ & |
+        \end{bmatrix}
+    }
+    \times
+    \underset{m \times n}{
+    \begin{bmatrix}
+    \sigma_{1} & 0 & \dots & 0 \\
+    0 & \sigma_{2} & \dots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \dots & \sigma_{n} \\
+    0 & 0 & \ldots & 0 \\
+    \end{bmatrix}}
+    \times
+    \underset{n \times n}{
+        \begin{bmatrix}
+            \textemdash & V_{1}^T & \textemdash  \\
+            \textemdash & V_{2}^T & \textemdash \\
+            \ & \vdots &  \ \\
+            \textemdash & V_{n}^T & \textemdash \\
+        \end{bmatrix}
+    }    
+\]
+
+\newpage
+\subsection*{QR decomposition}
+\begin{definition}{QR decomposition}{}
+    Let $A$ be a square invertable matrix. We call following decomposition a QR decomposition
+    $$
+        A=QR,
+    $$
+    where $Q$ is an unitary (orthogonal) matrix and $R$ is an upper triangular matrix. 
+\end{definition}
+% QR decomposition is often used to solve the linear least squares problem and is the basis for a particular eigenvalue algorithm, the QR algorithm. 
+
+\begin{theorema}{How to find QR decomposition}{qr_decomposition}
+    Given square invertable matrix $A=\begin{bmatrix}
+            | & | & \ & | \\
+            \vec{a}_{1} & \vec{a}_{2} & \dots & \vec{a}_{m} \\
+            | & | & \ & |
+        \end{bmatrix}$ with columns $\vec{a}_1,\vec{a}_2,\ldots,\vec{a}_m$, the QR decomposition of $A$ can be found using \href{https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process}{Gram–Schmidt process}
+        $$
+        \begin{aligned} 
+            \vec{u} _{1}&= \vec{a} _{1},& \vec{e} _{1}&={\frac { \vec{u} _{1}}{\| \vec{u} _{1}\|}}\\ \vec{u} _{2}&= \vec{a} _{2}-\operatorname {proj} _{ \vec{u} _{1}} \vec{a} _{2},& \vec{e} _{2}&={\frac { \vec{u} _{2}}{\| \vec{u} _{2}\|}}\\ \vec{u} _{3}&= \vec{a} _{3}-\operatorname {proj} _{ \vec{u} _{1}} \vec{a} _{3}-\operatorname {proj} _{ \vec{u} _{2}} \vec{a} _{3},& \vec{e} _{3}&={\frac { \vec{u} _{3}}{\| \vec{u} _{3}\|}}\\&\;\;\vdots &&\;\;\vdots \\ \vec{u} _{m}&= \vec{a} _{m}-\sum _{j=1}^{m-1}\operatorname {proj} _{ \vec{u} _{j}} \vec{a} _{m},& \vec{e} _{m}&={\frac { \vec{u} _{m}}{\| \vec{u} _{m}\|}},
+        \end{aligned}
+        $$
+        where 
+        $$
+             \operatorname {proj}_{ \vec{u} } \vec{a} 
+             ={\frac {  \vec{u}^*\vec{a} }{\vec{u}^{*}\vec{u} }}{ \vec{u} }.
+        $$
+        Then 
+        \begin{eqnarray}
+            Q=
+            \begin{bmatrix}
+                | & | & \ & | \\
+                \vec{e}_{1} & \vec{e}_{2} & \dots & \vec{e}_{m} \\
+                | & | & \ & |
+            \end{bmatrix},\qquad
+            R=
+            \begin{bmatrix}
+                 \vec{e} _{1}^* \vec{a} _{1} & \vec{e} _{1}^* \vec{a} _{2} & \vec{e} _{1}^* \vec{a} _{3} &\cdots & \vec{e} _{1}^* \vec{a} _{m} \\0& \vec{e} _{2}^* \vec{a} _{2} & \vec{e} _{2}^* \vec{a} _{3} &\cdots & \vec{e} _{2}^* \vec{a} _{m} \\0&0& \vec{e} _{3}^* \vec{a} _{3} &\cdots & \vec{e} _{3}^* \vec{a} _{m} \\\vdots &\vdots &\vdots &\ddots &\vdots \\0&0&0&\cdots & \vec{e} _{m}^* \vec{a} _{m} 
+            \end{bmatrix}.\nonumber
+        \end{eqnarray}
+
+\end{theorema}
