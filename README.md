@@ -18,7 +18,7 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 
 **Seminars**
 1. [Seminar 1: Skeletonization and SVD](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar01-svd.pdf)
-2. [Seminar 3: Matrix Decompositions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminars03-decompositions.pdf) 
+2. [Seminar 3: Matrix Decompositions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar03-decompositions.pdf) 
 
 ## Contact Information
 
