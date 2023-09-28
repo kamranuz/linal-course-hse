@@ -1,0 +1,124 @@
+\fancyfoot[R]{v1.0}
+\section{Matrix decompositions}
+
+\begin{problem}{Cholesky decomposition}
+    Find Cholesky decomposition matrix of the matrix 
+    $A = \begin{bmatrix}
+            2 & -3 \\
+            -3 & 5
+        \end{bmatrix}$.
+\begin{solution}
+    We need to find following decomposition
+    \begin{eqnarray}      
+        A=LL^*,\label{1}
+    \end{eqnarray}
+    where $L$ is lower triangular matrix. 
+    
+    We solve the problem using method of undetermined coefficients. Let 
+    $L= \begin{bmatrix}
+            x & 0 \\
+            y & z
+        \end{bmatrix}$, then $L$ has to satisfy~(\ref{1})
+        \begin{eqnarray}
+            \begin{bmatrix}
+                2 & -3 \\
+                -3 & 5
+            \end{bmatrix}
+            &\equiv&
+            \begin{bmatrix}
+                x & 0 \\
+                y & z
+            \end{bmatrix}
+            \begin{bmatrix}
+                x & y \\
+                0 & z
+            \end{bmatrix}\nonumber\\
+            \begin{bmatrix}
+                2 & -3 \\
+                -3 & 5
+            \end{bmatrix}
+            &\equiv&
+            \begin{bmatrix}
+                x^2 & xy \\
+                xy & y^2+z^2
+            \end{bmatrix},\nonumber
+        \end{eqnarray}
+        meaning 
+        \begin{equation}
+            \begin{cases}
+                x^2=2\\
+                xy=-3\\
+                y^2+z^2=5\\
+            \end{cases}
+            \Rightarrow
+            \begin{cases}
+                x=\sqrt{2}\\
+                y=-\dfrac{3}{\sqrt{2}}\\
+                z=\dfrac{1}{\sqrt{2}}\\
+            \end{cases}.\label{2}
+        \end{equation}
+        Using (\ref{2}), we get Cholesky deconposition 
+        $$
+            L=\dfrac{1}{\sqrt{2}}
+            \begin{bmatrix}
+                 2 & 0\\
+                -3 & 1
+            \end{bmatrix}
+            \Longrightarrow
+            A=\dfrac{1}{\sqrt{2}}
+            \begin{bmatrix}
+                 2 & 0\\
+                -3 & 1
+            \end{bmatrix}
+            \dfrac{1}{\sqrt{2}}
+            \begin{bmatrix}
+                 2 & 0\\
+                -3 & 1
+            \end{bmatrix}^*
+        $$      
+\end{solution}
+\end{problem}
+\begin{problem}{QR decomposition}
+    Find QR decomposition matrix of the matrix 
+    $A = \begin{bmatrix}
+            1 & 2 \\
+            0 & 3
+        \end{bmatrix}$.
+\begin{solution}
+    We need to find following decomposition
+    \begin{eqnarray}      
+        A=QR,\nonumber
+    \end{eqnarray}
+    where $Q$ is unitary (orthogonal) and $R$ is upper triangular matrix. Since $A$ is already upper triangular matrix, QR decomposition is trivial. Let
+    $$
+        Q=I=
+        \begin{bmatrix}
+            1 & 0\\
+            0 & 1
+        \end{bmatrix},\qquad 
+        R=A.
+    $$
+\end{solution}
+\end{problem}
+% \begin{problem}{QR decomposition}
+%     Find QR decomposition matrix of the matrix 
+%     $A = \begin{bmatrix}
+%             1 & 0 \\
+%             2 & 3
+%         \end{bmatrix}$.
+% \begin{solution}
+%     We need to find following decomposition
+%     \begin{eqnarray}      
+%         A=QR,\label{1}
+%     \end{eqnarray}
+%     where $Q$ is unitary (orthogonal) and $R$ is upper triangular matrix.
+%     $$
+%         Q=I=
+%         \begin{bmatrix}
+%             1 & 0\\
+%             0 & 1
+%         \end{bmatrix},\qquad 
+%         R=A.
+%     $$
+% \end{solution}
+% \end{problem}
