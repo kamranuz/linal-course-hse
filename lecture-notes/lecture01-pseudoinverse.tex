@@ -36,7 +36,7 @@
     \par
     But in the real world with the linear models, the initial data can be inaccurate due to the observational errors in some physical cases or human reliability in, for example, social or business situations. It can lead to some problems. For example, in Gaussian elimination, you need to choose a pivot variable, and if it contains some errors, then other computations will increase them. In situations with high order errors, such methods cannot be applied. But even if you have the exact formula and enough resources for calculating the inverted matrix, you will realize that the inverse is obtained with some errors. Another problem is rounding. It happens because of the precise nature of Gaussian elimination algorithm or other algorithms and machine precision. It is hard and slow to calculate the precision of the solution.
     \par
-    The next problem is about speed or complexity of calculations. For example, the complexity for Gaussian elimination is $\bigO(n^3)$. It is not suitable for dealing with, for example, video or signals in real time.
+    The next problem is about speed or complexity of calculations. For example, the complexity for Gaussian elimination is $\mathcal{O}(n^3)$. It is not suitable for dealing with, for example, video or signals in real time.
     \par 
     Suppose you have created a linear model that more or less describes the production or business process. For example, you get the vector of unknowns $\vec{x}$, which means that you should sell $x_1$ copies of product 1 and $x_2$ copies of product 2, etc. How much must you produce or sell? It is a set of possible scenarios needed to solve. Then you can face an indefinite system because your initial data are not exact.
     \subsubsection*{Indefinite (indeterminate) system}
@@ -152,6 +152,6 @@
     \begin{theorema}{}{}
         For each matrix $A \in M_{m\times n}(\C)$, its pseudoinverse matrix $A^+$ exists. If $A = F \cdot G$ is a full rank decomposition, then
         \[
-            A^+ = G^+F^+ = G^*\left(G \cdot G^*\right)^{-1} \left(F^* \cdot F\right)^{-1}F^*. 
+            A^+ = G^+F^+ = G^*\left(G  G^*\right)^{-1} \left(F^*F\right)^{-1}F^*. 
         \]
     \end{theorema}
