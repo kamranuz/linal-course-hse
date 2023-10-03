@@ -14,7 +14,9 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 **Lectures**
 1. [Lecture 1: Intro, Pseudoinverse and Skeletonization](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture01-pseudoinverse.pdf) 
 2. [Lecture 2: Pseudosolutions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture02-pseudosolutions.pdf)
-3. [Lecture 3: Matrix Decompositions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture03-decompositions.pdf) 
+3. [Lecture 3: Matrix Decompositions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture03-decompositions.pdf)
+4. [Lecture 4: Interpolation problem. Splines. Bézier curves.](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture03-decompositions.pdf) 
+
 
 **Seminars**
 1. [Seminar 1: Skeletonization and SVD](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar01-svd.pdf)
