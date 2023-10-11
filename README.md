@@ -16,7 +16,7 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 2. [Lecture 2: Pseudosolutions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture02-pseudosolutions.pdf)
 3. [Lecture 3: Matrix Decompositions](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture03-decompositions.pdf)
 4. [Lecture 4: Interpolation problem, Splines and Bézier curves](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture04-interpolations.pdf)
-5. [Lecture 5: Metric spaces, Normed vector spaces](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture05-metrics.pdf) 
+5. [Lecture 5: Metric spaces and Normed vector spaces](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture05-metrics.pdf) 
 
 
 **Seminars**
