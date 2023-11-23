@@ -24,6 +24,11 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 9 | Low rank approximation| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture09-approximate_rank.pdf) |  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_small_rank_approx_eng.pdf) 
 10 | Approximate systems| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture10-approximate_systems.pdf)  |  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_condition_number_eng.pdf)  
 
+## Project 
+
+Сourse participants are invited to make a talk with your own projects. [Here](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/Project_eng_2023.pdf) is a sample list of projects. If you choose of create a project, please fill [the table](If you choose of create a project, please fill the table https://docs.google.com/spreadsheets/d/1IawQbKXwEAeqWrXqV4l8QZw4qbNyhHwveeCg-MGOhNY/edit?usp=sharing)
+
+
 ## Contact Information
 
 If you have questions or need assistance with the course, you can reach out to Professor Dmitri Piontkovski.
