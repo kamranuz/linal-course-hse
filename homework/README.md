@@ -11,4 +11,3 @@
 8. [Homework 8: Matrix norms](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_matrix_norms_eng.pdf)
 9. [Homework 9: Low rank approximation](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_small_rank_approx_eng.pdf)
 10. [Homework 10: Approximate systems](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_condition_number_eng.pdf) 
-
