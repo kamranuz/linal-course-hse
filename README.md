@@ -26,7 +26,7 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 
 ## Project 
 
-Сourse participants are invited to make a talk with your own projects. [Here](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/Project_eng_2023.pdf) is a sample list of projects. If you choose of create a project, please fill [the table](If you choose of create a project, please fill the table https://docs.google.com/spreadsheets/d/1IawQbKXwEAeqWrXqV4l8QZw4qbNyhHwveeCg-MGOhNY/edit?usp=sharing)
+Сourse participants are invited to make a talk with your own projects. [Here](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/Project_eng_2023.pdf) is a sample list of projects. If you choose of create a project, please fill [the table](https://docs.google.com/spreadsheets/d/1IawQbKXwEAeqWrXqV4l8QZw4qbNyhHwveeCg-MGOhNY/edit?usp=sharing).
 
 
 ## Contact Information
