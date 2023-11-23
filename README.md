@@ -19,7 +19,9 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 5. [Lecture 5: Metric spaces and Normed vector spaces](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture05-metrics.pdf)
 6. [Lecture 6: Chebyshev polynomials](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture06-chebyshev.pdf) 
 7. [Lecture 7: Norms in finite dimension vector spaces](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture07-minkowski.pdf) 
-8. [Lecture 8: Matrix norms](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture08-matrixnorms.pdf) 
+8. [Lecture 8: Matrix norms](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture08-matrixnorms.pdf)
+9. [Lecture 9: Low rank approximation](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture09-approximate_rank.pdf)
+10. [Lecture 10: Approximate systems](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture10-approximate_systems.pdf) 
 
 
 **Seminars**
