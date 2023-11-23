@@ -13,16 +13,16 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 
 № | Title | Lecture | Seminar | Homework 
 --- | --- | --- | --- |--- 
-1 | Intro, Pseudoinverse and Skeletonization| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture01-pseudoinverse.pdf)  | [📚](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar01-svd.pdf) | 290 
-2 | Pseudosolutions| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture02-pseudosolutions.pdf) | [📚](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar02-linearregression.pdf) | 290 
-3 | Matrix Decompositions| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture03-decompositions.pdf) | [📚](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar03-decompositions.pdf)  | 290 
-4 | Interpolation problem, Splines and Bézier curves| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture04-interpolations.pdf) |  | 290 
-5 | Metric spaces and Normed vector spaces| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture05-metrics.pdf) |  | 290 
-6 | Chebyshev polynomials| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture06-chebyshev.pdf)  |  | 290 
-7 | Norms in finite dimension vector spaces| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture07-minkowski.pdf)  |  | 290 
-8 | Matrix norms| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture08-matrixnorms.pdf) |  | 290 
-9 | Low rank approximation| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture09-approximate_rank.pdf) |  | 290 
-10 | Approximate systems| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture10-approximate_systems.pdf)  |  | 290 
+1 | Intro, Pseudoinverse and Skeletonization| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture01-pseudoinverse.pdf)  | [📚](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar01-svd.pdf) | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_pseudoinverse_eng.jpg)  
+2 | Pseudosolutions| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture02-pseudosolutions.pdf) | [📚](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar02-linearregression.pdf) |  
+3 | Matrix Decompositions| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture03-decompositions.pdf) | [📚](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/seminars/seminar03-decompositions.pdf)  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_decompostions_eng.jpg) 
+4 | Interpolation problem, Splines and Bézier curves| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture04-interpolations.pdf) |  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_approximate_eng.jpg) 
+5 | Metric spaces and Normed vector spaces| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture05-metrics.pdf) |  |  
+6 | Chebyshev polynomials| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture06-chebyshev.pdf)  |  |   
+7 | Norms in finite dimension vector spaces| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture07-minkowski.pdf)  |  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_metrics_n_norms_eng.pdf)  
+8 | Matrix norms| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture08-matrixnorms.pdf) |  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_matrix_norms_eng.pdf) 
+9 | Low rank approximation| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture09-approximate_rank.pdf) |  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_small_rank_approx_eng.pdf) 
+10 | Approximate systems| [📁](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture10-approximate_systems.pdf)  |  | [📝](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_condition_number_eng.pdf)  
 
 ## Contact Information
 
