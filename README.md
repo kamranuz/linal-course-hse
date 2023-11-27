@@ -23,7 +23,7 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 8 | Matrix norms| [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture08-matrixnorms.pdf) |  | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_matrix_norms_eng.pdf) 
 9 | Low rank approximation| [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture09-approximate_rank.pdf) |  | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_small_rank_approx_eng.pdf) 
 10 | Approximate systems| [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture10-approximate_systems.pdf)  |  | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_condition_number_eng.pdf)
-11 | Iteration methods | | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_iterations_eng.pdf]  
+11 | Iteration methods | | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_iterations_eng.pdf)  
 
 ## Project 
 
