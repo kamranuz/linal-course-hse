@@ -25,6 +25,7 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 10 | Approximate systems| [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture10-approximate_systems.pdf)  |  | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_condition_number_eng.pdf)
 11 | Iteration methods | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture11-iteration.pdf) | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_iterations_eng.pdf)  
 
+11 | TBA | TBA | | TBA
 ## Project 
 
 Сourse participants are invited to make a talk with their own projects. [Here](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/Project_eng_2023.pdf) is a sample list of projects. If you choose of create a project, please fill [the table](https://docs.google.com/spreadsheets/d/1IawQbKXwEAeqWrXqV4l8QZw4qbNyhHwveeCg-MGOhNY/edit?usp=sharing).
