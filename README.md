@@ -24,7 +24,7 @@ The course consists of lectures and seminars. Materials for subsequent lectures 
 9 | Low rank approximation| [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture09-approximate_rank.pdf) |  | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_small_rank_approx_eng.pdf) 
 10 | Approximate systems| [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture10-approximate_systems.pdf)  |  | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_condition_number_eng.pdf)
 11 | Iteration methods | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture11-iteration.pdf) | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_iterations_eng.pdf)  
-12 | Peron-Frobenius, Pagerank |  | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture11-iteration.pdf) | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_ord_Perron_n_Pagerank_e.pdf)  
+12 | Peron-Frobenius, Pagerank | TBA | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/lecture-notes/lecture11-iteration.pdf) | | [📎](https://raw.githubusercontent.com/kamranuz/linal-course-hse/master/homework/dz_ord_Perron_n_Pagerank_e.pdf)  
 13 | TBA | TBA | | TBA
 
 ## Project 
